@@ -12,6 +12,48 @@
 		<!-- 일기 내용 박스 -->
 
 		<div class="relative bg-[#FFF3E9] p-6 rounded-2xl w-[80%] max-w-2xl mx-auto shadow-md min-h-[350px]">
+
+			<!-- 감정태그 출력 (일기 내용 위) -->
+			<div class="flex items-center mb-3">
+				<c:choose>
+					<c:when test="${diary.emoTagId == 1}">
+						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+							style="background-color: #FFE082; color: #6d4c00;">
+							😊
+							<span class="ml-2">기쁨</span>
+						</span>
+					</c:when>
+					<c:when test="${diary.emoTagId == 2}">
+						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+							style="background-color: #90CAF9; color: #19427c;">
+							😔
+							<span class="ml-2">슬픔</span>
+						</span>
+					</c:when>
+					<c:when test="${diary.emoTagId == 3}">
+						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+							style="background-color: #FF8A65; color: #702009;">
+							😠
+							<span class="ml-2">분노</span>
+						</span>
+					</c:when>
+					<c:when test="${diary.emoTagId == 4}">
+						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+							style="background-color: #B39DDB; color: #4b2c6d;">
+							😰
+							<span class="ml-2">불안</span>
+						</span>
+					</c:when>
+					<c:otherwise>
+						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+							style="background-color: #E0E0E0; color: #4e4e4e;">
+							❓
+							<span class="ml-2">분류안함</span>
+						</span>
+					</c:otherwise>
+				</c:choose>
+			</div>
+
 			<c:if test="${diary.userCanModify}">
 				<button onclick="toggleEditMenu()" class="absolute top-4 right-4 hover:opacity-80 transition"
 					style="color: #FFA726; font-size: 21px;">☰</button>

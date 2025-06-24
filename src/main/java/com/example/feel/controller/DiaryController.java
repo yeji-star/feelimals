@@ -47,7 +47,7 @@ public class DiaryController {
 		}
 
 		diaryService.doDiaryWrite(rq.getLoginedMemberId(), body, emoTagId);
-		return "redirect:/feelimals/diary/list";
+		return "redirect:/feelimals/chatDiary/list";
 	}
 
 	// 일기 보기

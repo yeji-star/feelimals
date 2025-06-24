@@ -36,9 +36,11 @@ public class CalendarController {
 			item.put("emoji", getEmoji(d.getEmoTagId()));
 			item.put("type", d.isChat() ? "chat" : "diary");
 			item.put("body", trim(d.getBody()));
-			item.put("url", d.isChat()
-			    ? "/feelimals/chat/detail?id=" + d.getId()
-			    : "/feelimals/diary/detail?id=" + d.getId());
+			if (d.isChat() && d.getSessionId() != null) { // 채팅인경우 세션ID쓰기
+				item.put("url", "/feelimals/chat/detail?sessionId=" + d.getSessionId());
+			} else {
+				item.put("url", "/feelimals/diary/detail?id=" + d.getId());
+			}
 
 			result.add(item);
 		}
@@ -48,17 +50,18 @@ public class CalendarController {
 
 	private String getEmoji(int emoId) {
 		return switch (emoId) {
-			case 1 -> "😐";
-			case 2 -> "😊";
-			case 3 -> "😢";
-			case 4 -> "😠";
-			case 5 -> "😱";
-			default -> "🐾";
+		case 1 -> "😐";
+		case 2 -> "😔";
+		case 3 -> "😠";
+		case 4 -> "😰";
+		case 5 -> "❓";
+		default -> "🐾";
 		};
 	}
 
 	private String trim(String body) {
-		if (Ut.isEmptyOrNull(body)) return "";
+		if (Ut.isEmptyOrNull(body))
+			return "";
 		return body.length() > 10 ? body.substring(0, 10) + "..." : body;
 	}
 }

@@ -16,6 +16,7 @@ public class Calendar {
 	private int id;
 	private int memberId;
 	private int emoTagId;
+	private Integer sessionId;
 	private String regDate;
 	private String updateDate;
 	private String body;

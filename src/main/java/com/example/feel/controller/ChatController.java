@@ -78,7 +78,7 @@ public class ChatController {
 		Map<String, Object> result = new HashMap<>();
 	    result.put("messages", messages);
 	    result.put("sessionId", sessionId);
-		return ResultData.from("S-1", "채팅 성공");
+		return ResultData.from("S-1", "채팅 성공", "result", result);
 	}
 
 	// 채팅 쌓기
@@ -111,7 +111,7 @@ public class ChatController {
 	    Map<String, Object> result = new HashMap<>();
 	    result.put("messages", messages);
 	    result.put("sessionId", sessionId);
-	    return ResultData.from("S-1", "메시지 추가 성공");
+	    return ResultData.from("S-1", "메시지 추가 성공", "result", result);
 	}
 
 	

@@ -22,7 +22,7 @@
 				height: 'auto',
 				contentHeight: 'auto',
 				eventColor: '#FFD8B1',
-				dayMaxEvents: true, // ✅ 잘못된 위치 수정
+				dayMaxEvents: 3, // ✅ 잘못된 위치 수정
 
 				// ✅ 서버에서 ResultData 구조로 받아서 events 배열만 꺼내기
 				events: function (fetchInfo, successCallback, failureCallback) {

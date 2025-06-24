@@ -23,7 +23,7 @@
 				height: 'auto',
 				contentHeight: 'auto',
 				eventColor: '#FFD8B1',
-				dayMaxEvents: true,
+				dayMaxEvents: 3,
 				
 				events: function (fetchInfo, successCallback, failureCallback) {
 					fetch('/feelimals/calendar/events')
