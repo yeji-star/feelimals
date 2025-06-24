@@ -38,7 +38,7 @@ public class DiaryController {
 	// 일기 작성
 
 	@RequestMapping("/feelimals/diary/doWrite")
-	public String doDiaryWrite(HttpServletRequest req, String body) {
+	public String doDiaryWrite(HttpServletRequest req, String body, int emoTagId) {
 
 		Rq rq = (Rq) req.getAttribute("rq");
 
@@ -46,7 +46,7 @@ public class DiaryController {
 			return rq.historyBackOnView("오늘 겪었던 일을 떠올려봐.");
 		}
 
-		diaryService.doDiaryWrite(rq.getLoginedMemberId(), body);
+		diaryService.doDiaryWrite(rq.getLoginedMemberId(), body, emoTagId);
 		return "redirect:/feelimals/diary/list";
 	}
 

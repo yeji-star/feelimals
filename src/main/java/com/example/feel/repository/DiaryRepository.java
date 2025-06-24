@@ -9,7 +9,7 @@ import com.example.feel.vo.Diary;
 @Mapper
 public interface DiaryRepository {
 
-	public int doDiaryWrite(int memberId, String body);
+	public int doDiaryWrite(int memberId, String body, int emoTagId);
 
 	public int getLastInsertId();
 

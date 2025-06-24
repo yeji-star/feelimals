@@ -16,8 +16,8 @@ public class DiaryService {
 	@Autowired
 	private DiaryRepository diaryRepository;
 
-	public ResultData doDiaryWrite(int memberId, String body) {
-		diaryRepository.doDiaryWrite(memberId, body);
+	public ResultData doDiaryWrite(int memberId, String body, int emoTagId) {
+		diaryRepository.doDiaryWrite(memberId, body, emoTagId);
 
 		int id = diaryRepository.getLastInsertId();
 
