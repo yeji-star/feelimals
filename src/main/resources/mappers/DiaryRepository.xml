@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.feel.repository.DiaryRepository">
+
+	<insert id="doDiaryWrite"
+		parameterType="com.example.feel.vo.Diary">
+		INSERT INTO chatDiary
+		SET regDate
+		= NOW(),
+		updateDate =
+		NOW(),
+		memberId = #{memberId},
+		`body` =
+		#{body},
+		thisChat = FALSE,
+		emoTagId =
+		#{emoTagId}
+	</insert>
+
+	<delete id="deleteDiary" parameterType="int">
+		DELETE FROM chatDiary
+		WHERE id
+		= #{id}
+	</delete>
+
+	<update id="modifyDiary"
+		parameterType="com.example.feel.vo.Diary">
+		UPDATE chatDiary
+		<set>
+			<if test="body != null and body != ''">`body` = #{body},</if>
+			updateDate = NOW()
+		</set>
+		WHERE id = #{id}
+	</update>
+
+	<select id="getLastInsertId" parameterType="int">
+		SELECT
+		LAST_INSERT_ID()
+	</select>
+
+	<select id="getForPrintDiary" parameterType="int"
+		resultType="com.example.feel.vo.Diary">
+		SELECT C.*, M.nickname AS writer
+		FROM chatDiary AS C
+		INNER
+		JOIN `member`
+		AS M
+		ON c.memberId = M.id
+		WHERE c.id = #{id}
+	</select>
+
+	<select id="getDiaryById" parameterType="int"
+		resultType="com.example.feel.vo.Diary">
+		SELECT *
+		FROM chatDiary
+		WHERE id = #{id}
+	</select>
+
+	<select id="getForPrintDiaries"
+		resultType="com.example.feel.vo.Diary">
+		SELECT C.*, M.nickname AS writer
+		FROM chatDiary AS C
+		INNER
+		JOIN `member` AS M
+		ON c.memberId
+		= M.id
+		WHERE 1
+		GROUP BY C.id
+		ORDER BY C.id
+		DESC
+	</select>
+
+	<select id="getDiaries" resultType="com.example.feel.vo.Diary">
+		SELECT C.*, M.nickname AS
+		writer
+		FROM chatDiary AS C
+		INNER JOIN `member` AS M
+		ON C.memberId = M.id
+		ORDER BY C.id
+		DESC
+	</select>
+
+	<select id="getMemberById" parameterType="int"
+		resultType="com.example.feel.vo.Member">
+		SELECT * FROM `member`
+		WHERE id = #{id}
+	</select>
+
+	<select id="getMemberByLoginId" parameterType="string"
+		resultType="com.example.feel.vo.Member">
+		SELECT *
+		FROM member
+		WHERE loginId = #{loginId}
+	</select>
+
+	<select id="getAllDiaries" resultType="Diary">
+    SELECT id, memberId, body, regDate
+    FROM diary
+    WHERE delStatus = 0
+    ORDER BY regDate ASC
+  </select>
+
+</mapper>

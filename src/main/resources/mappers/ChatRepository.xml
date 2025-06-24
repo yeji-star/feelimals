@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.feel.repository.ChatRepository">
+
+	<!-- 사용자 메세지를 chatDiary에 저장 -->
+	<insert id="writeUserMessage">
+		INSERT INTO chatDiary
+		SET memberId = #{memberId},
+		sessionId = #{sessionId},
+		body
+		= #{body},
+		isUser = #{isUser},
+		thisChat =
+		#{thisChat},
+		emoTagId = #{emoTagId},
+		regDate = NOW(),
+		updateDate =
+		NOW()
+
+	</insert>
+
+	<!-- 최근 저장된 id 조회 -->
+	<select id="getLastInsertId" resultType="int">
+		SELECT LAST_INSERT_ID()
+	</select>
+
+	<!-- AI 답변 저장 -->
+	<insert id="writeAiReply">
+		INSERT INTO aiReply
+		SET chatdiaryId = #{chatId},
+		reply
+		= #{reply},
+		model = #{model},
+		regDate = NOW(),
+		updateDate = NOW()
+	</insert>
+
+	<!-- 감정명(label)으로 emoTag id 조회 -->
+	<select id="getEmoTagIdByEmotion" resultType="int">
+		SELECT id
+		FROM
+		emoTag
+		WHERE label = #{emotion}
+	</select>
+
+	<!-- 전체 조회 -->
+	<select id="getChatsWithAiBySessionId"
+		resultType="com.example.feel.vo.ChatWithAi">
+		SELECT
+		cd.id AS id,
+		cd.memberId,
+		cd.sessionId,
+		cd.body,
+		cd.thisChat,
+		cd.emoTagId,
+		cd.regDate,
+		ar.reply AS aiReply,
+		ar.model,
+		ar.regDate AS aiRegDate
+		FROM chatDiary cd
+		LEFT JOIN aiReply ar ON cd.id = ar.chatDiaryId
+		WHERE cd.sessionId = #{sessionId}
+		ORDER BY cd.id ASC
+	</select>
+
+	<!-- 전체 채팅 목록 -->
+	<select id="getChatWithAiListByMemberId"
+		resultType="com.example.feel.vo.ChatWithAi">
+		SELECT
+		cd.id AS chatId,
+		cd.body AS userBody,
+		cd.regDate AS
+		userRegDate,
+		ar.reply AS aiReply,
+		ar.model AS model,
+		ar.regDate AS
+		aiRegDate
+		FROM chatDiary cd
+		LEFT JOIN aiReply ar
+		ON cd.id =
+		ar.chatdiaryId
+		WHERE cd.memberId = #{memberId}
+		AND cd.thisChat =
+		true
+		ORDER BY cd.id DESC
+	</select>
+
+	<!-- 사용자 메시지 수정 -->
+	<update id="modifyChat">
+		UPDATE chatDiary
+		SET body = #{newBody},
+		updateDate =
+		NOW()
+		WHERE id = #{chatId}
+		AND memberId = #{memberId}
+		AND thisChat = true
+	</update>
+
+	<select id="getChatSessionById"
+		resultType="com.example.feel.vo.ChatSession">
+		SELECT * FROM chatSession
+		WHERE id = #{id}
+	</select>
+
+	<!-- ai 대화 삭제 -->
+
+	<delete id="doDeleteAiReplySession">
+		DELETE FROM aireply
+		WHERE chatDiaryId IN (
+		SELECT id
+		FROM chatDiary WHERE sessionId = #{id}
+		)
+	</delete>
+
+	<!-- 대화 삭제할 때 chatDiary에 있는 데이터까지 같이 삭제 -->
+	<delete id="doDeleteChatDiarySession">
+		DELETE FROM chatDiary
+		WHERE sessionId =
+		#{sessionId}
+	</delete>
+
+	<!-- 대화 전체 삭제 -->
+	<delete id="doDeleteChatSession">
+		DELETE FROM chatSession
+		WHERE id = #{id}
+	</delete>
+
+	<select id="countSessionByMemberId" resultType="int">
+		SELECT COUNT(*)
+		FROM chatSession
+		WHERE id = #{sessionId}
+		AND memberId = #{memberId}
+		AND
+		delStatus = 0
+	</select>
+
+	<!-- 새 세션 생성 -->
+	<insert id="createNewChatSession">
+		INSERT INTO chatSession
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		memberId = #{memberId}
+	</insert>
+
+</mapper>
