@@ -130,7 +130,7 @@ body {
 		<div class="chat-box" id="chatBox">
 			<!-- 캐릭터가 먼저 말하기 -->
 			<div class="chat-msg-wrapper ai">
-				<img src="/resource/img/rabbit_5.png" class="character-img" alt="AI 캐릭터" />
+				<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" alt="AI 캐릭터" />
 				<div class="msg him">오늘 어떻게 보냈어?</div>
 			</div>
 
@@ -141,10 +141,10 @@ body {
 				<div class="chat-msg-wrapper ai">
 					<c:choose>
 						<c:when test="${not empty items.emoTagId}">
-							<img src="/resource/img/rabbit_${items.emoTagId}.png" class="character-img" />
+							<img src="/resource/img/chara_${rq.loginedMember.charaId }_${items.emoTagId}.png" class="character-img" />
 						</c:when>
 						<c:otherwise>
-							<img src="/resource/img/rabbit_5.png" class="character-img" />
+							<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" />
 						</c:otherwise>
 					</c:choose>
 					<div class="msg him">${items.aiReply}</div>

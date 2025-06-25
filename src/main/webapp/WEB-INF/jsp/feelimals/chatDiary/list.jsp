@@ -107,7 +107,7 @@ opacity
 		<!-- 캐릭터 + 말풍선 (리스트 바로 오른쪽 하단) -->
 		<div class="flex flex-col items-end self-end">
 			<div class="text-xs text-gray-700 mb-1">최선을 다했구나</div>
-			<img src="/resource/img/rabbit_5.png" alt="캐릭터" alt="AI 캐릭터" class="character-img w-16 h-16 object-contain" />
+			<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" alt="캐릭터" alt="AI 캐릭터" class="character-img w-16 h-16 object-contain" />
 		</div>
 
 	</div>
