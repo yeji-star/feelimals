@@ -150,21 +150,21 @@ SET regDate = NOW(),
 updateDate = NOW(),
 `name` = '토끼',
 `content` = '토끼다',
-image = '/resource/img/rabbit_5.png';
+image = '/resource/img/chara_1_5.png';
 
 INSERT INTO chara
 SET regDate = NOW(),
 updateDate = NOW(),
 `name` = '부엉이',
 `content` = '부엉이다',
-image = '/resource/img/owl_5.png';
+image = '/resource/img/chara_2_5.png';
 
 INSERT INTO chara
 SET regDate = NOW(),
 updateDate = NOW(),
 `name` = '고양이',
 `content` = '고양이다',
-image = '/resource/img/cat_5.png';
+image = '/resource/img/chara_3_5.png';
 
 # 테스트 데이터 (유저)
 
@@ -283,39 +283,38 @@ INSERT INTO charaEmo
 SET charaId = 1,
 emoTagId = 1,
 emoType = '기쁨',
-image = '/resource/img/rabbit_1.png';
+image = '/resource/img/chara_1_1.png';
 
 INSERT INTO charaEmo
 SET charaId = 1,
 emoTagId = 2,
 emoType = '슬픔',
-image = '/resource/img/rabbit_2.png';
+image = '/resource/img/chara_1_2.png';
 
 INSERT INTO charaEmo
 SET charaId = 1,
 emoTagId = 3,
 emoType = '분노',
-image = '/resource/img/rabbit_3.png';
+image = '/resource/img/chara_1_3.png';
 
 INSERT INTO charaEmo
 SET charaId = 1,
 emoTagId = 4,
 emoType = '불안',
-image = '/resource/img/rabbit_4.png';
+image = '/resource/img/chara_1_4.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoTagId = 5,
+emoType = '분류안함',
+image = '/resource/img/chara_1_5.png';
 
 #부엉이
 INSERT INTO charaEmo
 SET charaId = 2,
 emoTagId = 1,
 emoType = '기쁨',
-image = '/resource/img/owl_1.png';
-
-
-INSERT INTO charaEmo
-SET charaId = 1,
-emoTagId = 5,
-emoType = '분류안함',
-image = '/resource/img/rabbit_5.png';
+image = '/resource/img/chara_2_1.png';
 
 SELECT * FROM aiReply WHERE chatdiaryId IN (SELECT id FROM chatDiary WHERE sessionId = 3);
 
