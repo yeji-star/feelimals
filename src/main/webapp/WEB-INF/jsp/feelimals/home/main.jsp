@@ -87,7 +87,7 @@ body, main {
 			<c:if test="${!rq.isLogined() }">
 				<!-- 캐릭터 이미지 -->
 				<div class="w-28 h-28 mb-7";">
-					<img src="/resource/img/rabbit_5.png" />
+					<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" />
 				</div>
 				<!-- 환영 메시지 -->
 				<div class="text-lg font-medium text-gray-800">나와 대화해보지 않을래?</div>
@@ -104,8 +104,8 @@ body, main {
 			</c:if>
 			<c:if test="${rq.isLogined() }">
 				<!-- 캐릭터 이미지 -->
-				<div class="w-28 h-28 mb-7";">
-					<img src="/resource/img/rabbit_1.png" />
+				<div class="w-28 h-28 mb-6";">
+					<img src="/resource/img/chara_${rq.loginedMember.charaId }_1.png" />
 				</div>
 				<!-- 환영 메시지 -->
 				<div class="text-lg font-medium text-gray-800">${rq.loginedMember.nickname},어서와!</div>

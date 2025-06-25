@@ -35,7 +35,7 @@ public class SettingController {
 
 	@PostMapping("/changeChara")
 	@ResponseBody
-	public ResultData changeChara(@RequestParam int charaId, HttpSession session) {
+	public ResultData changeChara(@RequestParam int charaId) {
 		Member member = rq.getLoginedMember();
 
 		if (member == null) {

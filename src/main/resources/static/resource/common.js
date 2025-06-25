@@ -29,22 +29,25 @@ function toggleEditMenu() {
 
 // 동물 캐릭터 선택
 function selectCharacter(animalId) {
-  fetch("/feelimals/setting/changeChara", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: `charaId=${animalId}`
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.resultCode === "S-1") {
-      alert("캐릭터가 변경되었습니다.");
-      location.reload(); // 또는 캐릭터 이미지만 변경
-    } else {
-      alert("실패: " + data.msg);
-    }
-  });
+	fetch("/feelimals/setting/changeChara", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/x-www-form-urlencoded"
+		},
+		body: `charaId=${animalId}`
+	})
+		.then(res => res.json())
+		.then(data => {
+			if (data.resultCode === "S-1") {
+				alert("캐릭터가 변경됐어!");
+				location.reload(); // 또는 캐릭터 이미지만 변경
+			} else {
+				alert("실패: " + (data.msg || "알 수 없는 오류"));
+			}
+		})
+		.catch(err => {
+			alert("서버 오류: " + err);
+		});
 }
 
 
