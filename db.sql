@@ -50,6 +50,30 @@ emoId = 1,
 emoType = '기쁨',
 image = '/resource/img/happyRabbit.png';
 
+INSERT INTO charaEmo
+SET charaId = 1,
+emoId = 2,
+emoType = '슬픔',
+image = '/resource/img/sadRabbit.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoId = 3,
+emoType = '분노',
+image = '/resource/img/angryRabbit.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoId = 4,
+emoType = '불안',
+image = '/resource/img/anxRabbit.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoId = 5,
+emoType = '분류안함',
+image = '/resource/img/muRabbit.png';
+
 
 CREATE TABLE `emoTag` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,

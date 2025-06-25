@@ -3,8 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- 상단 메뉴 -->
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
 <%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
 <title>대화 상세보기</title>
 <link rel="stylesheet" href="/resource/style.css">
 <style>
@@ -12,6 +14,27 @@ body {
 	background-color: #FAF7F5;
 	font-family: 'Lato', sans-serif;
 	margin: 0;
+}
+
+.chat-msg-wrapper {
+	display: flex;
+	align-items: flex-end;
+	gap: 0.5rem;
+}
+
+.chat-msg-wrapper.ai {
+	justify-content: flex-start;
+}
+
+.chat-msg-wrapper.user {
+	justify-content: flex-end;
+}
+
+.character-img {
+	width: 60px;
+	height: 60px;
+	object-fit: contain;
+	flex-shrink: 0;
 }
 
 .chat-container {
@@ -106,13 +129,26 @@ body {
 	<div class="chat-container">
 		<div class="chat-box" id="chatBox">
 			<!-- 캐릭터가 먼저 말하기 -->
-			<div class="msg him">오늘 무슨 일이 있었어?</div>
+			<div class="chat-msg-wrapper ai">
+				<img src="/resource/img/rabbit_5.png" class="character-img" alt="AI 캐릭터" />
+				<div class="msg him">오늘 어떻게 보냈어?</div>
+			</div>
 
-			<c:forEach var="item" items="${messages}">
+			<c:forEach var="items" items="${messages}">
 
-				<div class="msg you">${item.body}</div>
+				<div class="msg you">${items.body}</div>
 
-				<div class="msg him">${item.aiReply}</div>
+				<div class="chat-msg-wrapper ai">
+					<c:choose>
+						<c:when test="${not empty items.emoTagId}">
+							<img src="/resource/img/rabbit_${items.emoTagId}.png" class="character-img" />
+						</c:when>
+						<c:otherwise>
+							<img src="/resource/img/rabbit_5.png" class="character-img" />
+						</c:otherwise>
+					</c:choose>
+					<div class="msg him">${items.aiReply}</div>
+				</div>
 
 			</c:forEach>
 		</div>

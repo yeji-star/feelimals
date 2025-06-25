@@ -72,8 +72,6 @@ body, main {
 
 	<div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
-
-
 	<!-- 로그인 팝업창 -->
 	<c:if test="${!rq.isLogined()}">
 		<%@ include file="/WEB-INF/jsp/feelimals/member/popup-login.jspf"%>
@@ -89,7 +87,7 @@ body, main {
 			<c:if test="${!rq.isLogined() }">
 				<!-- 캐릭터 이미지 -->
 				<div class="w-28 h-28 mb-7";">
-					<img src="/resource/img/muRabbit.png" />
+					<img src="/resource/img/rabbit_5.png" />
 				</div>
 				<!-- 환영 메시지 -->
 				<div class="text-lg font-medium text-gray-800">나와 대화해보지 않을래?</div>
@@ -107,7 +105,7 @@ body, main {
 			<c:if test="${rq.isLogined() }">
 				<!-- 캐릭터 이미지 -->
 				<div class="w-28 h-28 mb-7";">
-					<img src="/resource/img/happyRabbit.png" />
+					<img src="/resource/img/rabbit_1.png" />
 				</div>
 				<!-- 환영 메시지 -->
 				<div class="text-lg font-medium text-gray-800">${rq.loginedMember.nickname},어서와!</div>

@@ -5,13 +5,36 @@
 <head>
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
 <%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
-<title>Feelimals Chat</title>
+<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+
+<title>대화중</title>
 <link rel="stylesheet" href="/resource/style.css">
 <style>
 body {
 	background-color: #FAF7F5;
 	font-family: 'Lato', sans-serif;
 	margin: 0;
+}
+
+.chat-msg-wrapper {
+	display: flex;
+	align-items: flex-end;
+	gap: 0.5rem;
+}
+
+.chat-msg-wrapper.ai {
+	justify-content: flex-start;
+}
+
+.chat-msg-wrapper.user {
+	justify-content: flex-end;
+}
+
+.character-img {
+	width: 60px;
+	height: 60px;
+	object-fit: contain;
+	flex-shrink: 0;
 }
 
 .chat-container {
@@ -84,18 +107,30 @@ body {
 		<div class="chat-box" id="chatBox">
 
 			<!-- 캐릭터가 먼저 말하기 -->
-			<div class="w-28 h-28 chat-msg-wrapper ai">
-				<img src="/resource/img/muRabbit.png" class="character-img" alt="AI 캐릭터" />
+			<div class="chat-msg-wrapper ai">
+				<img src="/resource/img/rabbit_5.png" class="character-img" alt="AI 캐릭터" />
 				<div class="msg him">오늘 어떻게 보냈어?</div>
 			</div>
 
-			<c:forEach var="item" items="${messages}">
-				<c:if test="${item.thisChat}">
-					<div class="msg you">${item.body}</div>
+			<c:forEach var="items" items="${messages}">
+				<c:if test="${items.thisChat}">
+					<div class="chat-msg-wrapper user">
+						<div class="msg you">${item.body}</div>
+					</div>
 				</c:if>
-				<c:if test="${not empty item.aiReply}">
-					<div class="msg him">${item.aiReply}</div>
-				</c:if>
+
+				<div class="chat-msg-wrapper ai">
+					<c:choose>
+						<c:when test="${not empty items.emoTagId}">
+							<img src="/resource/img/rabbit_${items.emoTagId}.png" class="character-img" />
+						</c:when>
+						<c:otherwise>
+							<img src="/resource/img/rabbit_5.png" class="character-img" />
+						</c:otherwise>
+					</c:choose>
+					<div class="msg him">${items.aiReply}</div>
+				</div>
+
 			</c:forEach>
 		</div>
 
