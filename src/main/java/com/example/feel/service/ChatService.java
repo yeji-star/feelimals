@@ -53,8 +53,8 @@ public class ChatService {
 	}
 
 	// AI 응답 저장
-	public void writeAiReply(int chatId, String reply, String model) {
-		chatRepository.writeAiReply(chatId, reply, model);
+	public void writeAiReply(int chatDiaryId, String reply, String model) {
+		chatRepository.writeAiReply(chatDiaryId, reply, model);
 
 	}
 

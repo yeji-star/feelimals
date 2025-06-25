@@ -30,7 +30,7 @@
 		parameterType="com.example.feel.vo.Diary">
 		UPDATE chatDiary
 		<set>
-			<if test="body != null and body != ''">`body` = #{body},</if>
+			<if test="body != null and body != ''">`body` = #{body}, `emoTagId` = #{emoTagId}, </if>
 			updateDate = NOW()
 		</set>
 		WHERE id = #{id}
@@ -97,10 +97,10 @@
 	</select>
 
 	<select id="getAllDiaries" resultType="Diary">
-    SELECT id, memberId, body, regDate
-    FROM diary
-    WHERE delStatus = 0
-    ORDER BY regDate ASC
-  </select>
+		SELECT id, memberId, body, regDate
+		FROM diary
+		WHERE delStatus = 0
+		ORDER BY regDate ASC
+	</select>
 
 </mapper>

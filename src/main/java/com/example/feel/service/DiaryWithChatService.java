@@ -18,4 +18,14 @@ public class DiaryWithChatService {
 		return diaryWithChatRepository.getForPrintDiaryWithChats(memberId);
 	}
 
+	public List<DiaryWithChat> getDiaryOnly(int memberId) {
+		
+		return diaryWithChatRepository.getDiaryOnly(memberId);
+	}
+
+	public List<DiaryWithChat> getChatOnly(int memberId) {
+		
+		return diaryWithChatRepository.getChatOnly(memberId);
+	}
+
 }

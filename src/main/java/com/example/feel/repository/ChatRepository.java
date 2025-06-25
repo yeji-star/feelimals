@@ -16,7 +16,7 @@ public interface ChatRepository {
 
 	public int getLastInsertId();
 
-	public void writeAiReply(int chatId, String reply, String model);
+	public void writeAiReply(int chatDiaryId, String reply, String model);
 	
 	public Integer getEmoTagIdByEmotion(String emotion);
 

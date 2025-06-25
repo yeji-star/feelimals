@@ -14,7 +14,7 @@
 		= #{body},
 		isUser = #{isUser},
 		thisChat =
-		#{thisChat},
+		true,
 		emoTagId = #{emoTagId},
 		regDate = NOW(),
 		updateDate =
@@ -30,7 +30,7 @@
 	<!-- AI 답변 저장 -->
 	<insert id="writeAiReply">
 		INSERT INTO aiReply
-		SET chatdiaryId = #{chatId},
+		SET chatdiaryId = #{chatDiaryId},
 		reply
 		= #{reply},
 		model = #{model},
@@ -50,10 +50,11 @@
 	<select id="getChatsWithAiBySessionId"
 		resultType="com.example.feel.vo.ChatWithAi">
 		SELECT
-		cd.id AS id,
+		cd.id,
 		cd.memberId,
 		cd.sessionId,
 		cd.body,
+		cd.isUser,
 		cd.thisChat,
 		cd.emoTagId,
 		cd.regDate,
@@ -63,6 +64,7 @@
 		FROM chatDiary cd
 		LEFT JOIN aiReply ar ON cd.id = ar.chatDiaryId
 		WHERE cd.sessionId = #{sessionId}
+		AND cd.thisChat = TRUE
 		ORDER BY cd.id ASC
 	</select>
 

@@ -39,7 +39,7 @@ function sendMessage() {
 	if (message === "") return;
 
 	// 내 메시지 바로 추가
-	appendMessage({ type: "user", body: message });
+	//	appendMessage({ type: "user", body: message });
 	input.value = "";
 	input.disabled = true;
 
@@ -54,7 +54,7 @@ function sendMessage() {
 	} else {
 		// 기존 세션에 추가
 		url = '/feelimals/chat/add';
-		bodyData = `sessionId=${encodeURIComponent(sessionId)}&body=${encodeURIComponent(message)}`;
+		bodyData = `sessionId=${sessionId}&body=${encodeURIComponent(message)}`;
 	}
 
 	// 서버에 메시지 보내고, AI 답변 받기 (ajax)
@@ -66,12 +66,12 @@ function sendMessage() {
 		.then(res => res.json())
 		.then(res => {
 			// ★★★ 응답에서 sessionId 갱신 꼭 해줘야 함 ★★★
-			if (res.data1 && res.data1.length > 0) {
+			if (res.data1 && res.data1.sessionId) {
 				// 응답 데이터에서 세션ID 추출(최신 채팅의 sessionId)
-				sessionId = res.data1[0].sessionId;
+				sessionId = res.data1.sessionId;
 				window.sessionId = sessionId;
 			}
-			let messages = res.data1;
+			let messages = res.data1.messages;
 			if (!Array.isArray(messages) || messages.length === 0) {
 				alert('서버 응답 오류');
 				input.disabled = false;
@@ -102,8 +102,6 @@ function appendMessage({ type, body }) {
 	div.className = type === "user" ? "msg you" : "msg him";
 	div.textContent = body;
 	chatBox.appendChild(div);
-	// 항상 맨 아래로 스크롤
-	chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 // 전체 메시지(과거 대화) 복원하기 (새로고침, 입장시)
@@ -115,13 +113,16 @@ function renderMessages(messages) {
 		return;
 	}
 	messages.forEach(msg => {
-		if (msg.thisChat) {
+		if (msg.isUser || msg.thisChat) {
 			appendMessage({ type: "user", body: msg.body });
 		}
-		if (msg.aiReply) {
+		if (msg.aiReply && msg.aiReply.trim() !== "") {
 			appendMessage({ type: "ai", body: msg.aiReply });
 		}
 	});
+	setTimeout(() => { // 채팅박스 갱신 시킴 (항상 맨마지막에)
+		chatBox.scrollTop = chatBox.scrollHeight;
+	}, 0);
 }
 
 function continueChat(sessionId) {

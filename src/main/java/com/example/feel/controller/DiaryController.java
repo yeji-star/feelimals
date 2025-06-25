@@ -94,7 +94,7 @@ public class DiaryController {
 
 	@RequestMapping("/feelimals/diary/doModify")
 	@ResponseBody
-	public String doModify(HttpServletRequest req, int id, String body) {
+	public String doModify(HttpServletRequest req, int id, String body, int emoTagId) {
 		Rq rq = (Rq) req.getAttribute("rq");
 
 		Diary diary = diaryService.getDiaryById(id);
@@ -110,7 +110,7 @@ public class DiaryController {
 		}
 
 		if (userCanModifyRd.isSuccess()) {
-			diaryService.modifyDiary(id, body);
+			diaryService.modifyDiary(id, body, emoTagId);
 		}
 
 		diary = diaryService.getDiaryById(id);

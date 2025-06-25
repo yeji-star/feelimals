@@ -62,8 +62,8 @@ public class DiaryService {
 		return ResultData.from("S-1", "수정 가능해.");
 	}
 
-	public void modifyDiary(int id, String body) {
-		diaryRepository.modifyDiary(id, body);
+	public void modifyDiary(int id, String body, int emoTagId) {
+		diaryRepository.modifyDiary(id, body, emoTagId);
 		
 	}
 

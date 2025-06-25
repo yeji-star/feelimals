@@ -85,10 +85,12 @@ body, main {
 	<!-- 중앙... 메인 -->
 	<main class="flex-grow flex items-center justify-center text-center">
 		<div class="flex flex-col items-center space-y-4">
-			<!-- 캐릭터 이미지 -->
-			<div class="w-28 h-28 bg-gray-200 rounded-full bg-center bg-no-repeat bg-contain"
-				style="background-image: url('/resource/images/rabbit_black.png');"></div>
+
 			<c:if test="${!rq.isLogined() }">
+				<!-- 캐릭터 이미지 -->
+				<div class="w-28 h-28 mb-7";">
+					<img src="/resource/img/muRabbit.png" />
+				</div>
 				<!-- 환영 메시지 -->
 				<div class="text-lg font-medium text-gray-800">나와 대화해보지 않을래?</div>
 
@@ -103,6 +105,10 @@ body, main {
 				</div>
 			</c:if>
 			<c:if test="${rq.isLogined() }">
+				<!-- 캐릭터 이미지 -->
+				<div class="w-28 h-28 mb-7";">
+					<img src="/resource/img/happyRabbit.png" />
+				</div>
 				<!-- 환영 메시지 -->
 				<div class="text-lg font-medium text-gray-800">${rq.loginedMember.nickname},어서와!</div>
 

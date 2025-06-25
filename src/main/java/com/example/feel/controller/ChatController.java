@@ -67,54 +67,48 @@ public class ChatController {
 		// 4. 2차- 피드백 생성 요청
 		String feedback = chatService.sendFeedback(body, emotion);
 
-		// 5. AI 응답 저장
+		// 6. AI 응답 저장
 		chatService.writeAiReply(chatId, feedback, "gpt-3.5-turbo");
-		
 
-		// 6. 사용자 메시지 리턴
+		// 7. 사용자 메시지 리턴
 		List<ChatWithAi> messages = chatService.getChatsWithAiBySessionId(sessionId);
 
-		
 		Map<String, Object> result = new HashMap<>();
-	    result.put("messages", messages);
-	    result.put("sessionId", sessionId);
-		return ResultData.from("S-1", "채팅 성공", "result", result);
+		result.put("messages", messages);
+		result.put("sessionId", sessionId);
+		return ResultData.from("S-1", "채팅 성공", "data1", result);
 	}
 
 	// 채팅 쌓기
 	@PostMapping("/add")
 	@ResponseBody
-	public ResultData<Map<String, Object>> addMessage(
-	        @RequestParam int sessionId,
-	        @RequestParam String body) {
-	    int memberId = rq.getLoginedMemberId();
+	public ResultData<Map<String, Object>> addMessage(@RequestParam int sessionId, @RequestParam String body) {
+		int memberId = rq.getLoginedMemberId();
 
-	    // 1차 감정
-	    String emotion = chatService.getEmotion(body);
+		// 1차 감정
+		String emotion = chatService.getEmotion(body);
 
-	    // emoTagId 찾기
-	    int emoTagId = chatService.getEmoTagIdByEmotion(emotion);
+		// emoTagId 찾기
+		int emoTagId = chatService.getEmoTagIdByEmotion(emotion);
 
-	    // 사용자 메시지 저장
-	    int chatId = chatService.writeUserMessage(memberId, sessionId, body, emoTagId, true, true);
+		// 사용자 메시지 저장
+		int chatId = chatService.writeUserMessage(memberId, sessionId, body, emoTagId, true, true);
 
-	    // 2차 피드백
-	    String feedback = chatService.sendFeedback(body, emotion);
+		// 2차 피드백
+		String feedback = chatService.sendFeedback(body, emotion);
 
-	    // AI 응답 저장
-	    chatService.writeAiReply(chatId, feedback, "gpt-3.5-turbo");
+		// AI 응답 저장
+		chatService.writeAiReply(chatId, feedback, "gpt-3.5-turbo");
 
-	    // 전체 메시지 리턴
-	    List<ChatWithAi> messages = chatService.getChatsWithAiBySessionId(sessionId);
+		// 전체 메시지 리턴
+		List<ChatWithAi> messages = chatService.getChatsWithAiBySessionId(sessionId);
 
-	    
-	    Map<String, Object> result = new HashMap<>();
-	    result.put("messages", messages);
-	    result.put("sessionId", sessionId);
-	    return ResultData.from("S-1", "메시지 추가 성공", "result", result);
+		Map<String, Object> result = new HashMap<>();
+		result.put("messages", messages);
+		result.put("sessionId", sessionId);
+		return ResultData.from("S-1", "메시지 추가 성공", "data1", result);
 	}
 
-	
 	// 상세 화면
 
 	@GetMapping("/detail")

@@ -14,12 +14,6 @@ keyframes fadeDrop { 0% {
 100
 
 
-
-
-
-
-
-
 %
 {
 transform
@@ -27,22 +21,10 @@ transform
 
 
 
-
-
-
-
 :
 
 
-
-
-
-
-
-
 translateY
-
-
 
 
 
@@ -52,22 +34,10 @@ translateY
 
 
 
-
-
-
-
 0
 
 
-
-
-
-
-
-
 )
-
-
 
 
 
@@ -78,23 +48,12 @@ opacity
 
 
 
-
-
-
-
 :
 
 
 
 
-
-
-
-
 1
-
-
-
 
 
 
@@ -140,7 +99,7 @@ opacity
 						<c:when test="${item.thisChat}">
 							<!-- 🟠 채팅 스타일로 출력 -->
 							<a href="../chat/detail?sessionId=${item.sessionId}" class="note note-animate bg-[#D1C4E9]"
-								style="animation-delay: ${loop.index * 0.1}s">
+								style="animation-delay: ${loop.index * 0.3}s">
 								<div class="text-xs text-gray-500 mb-1">${item.regDate}</div>
 								<div class="text-sm text-gray-800">
 									🙋‍♀️ 대화: ${fn:substring(item.body, 0, 40)}

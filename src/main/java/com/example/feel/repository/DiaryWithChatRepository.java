@@ -12,4 +12,8 @@ public interface DiaryWithChatRepository {
 
 	public List<DiaryWithChat> getForPrintDiaryWithChats(int memberId);
 
+	public List<DiaryWithChat> getDiaryOnly(int memberId);
+
+	public List<DiaryWithChat> getChatOnly(int memberId);
+
 }

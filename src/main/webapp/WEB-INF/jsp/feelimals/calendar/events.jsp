@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html lang='ko'>
 <head>
+<!-- 메뉴바 -->
+<%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
+<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+
 <meta charset='utf-8' />
 <title>캘린더</title>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
@@ -53,9 +57,6 @@
 	</script>
 </head>
 <body class="bg-[#FAF7F5] min-h-screen">
-	<!-- 메뉴바 -->
-	<%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
-	<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
 
 	<br>
 	<div id='calendar' class="max-w-4xl mx-auto p-4"></div>

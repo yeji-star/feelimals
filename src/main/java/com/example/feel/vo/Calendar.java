@@ -25,7 +25,7 @@ public class Calendar {
 	
 	
 	
-	private boolean isChat;
+	private boolean thisChat;
 	
 
 }

@@ -18,6 +18,7 @@ public class ChatWithAi {
     private int memberId;
     private int sessionId;
     private String body;
+    private boolean isUser;
     private boolean thisChat;
     private int emoTagId;
     private String regDate;

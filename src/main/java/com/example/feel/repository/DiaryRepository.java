@@ -19,7 +19,7 @@ public interface DiaryRepository {
 
 	public Diary getForPrintDiary(int id);
 
-	public void modifyDiary(int id, String body);
+	public void modifyDiary(int id, String body, int emoTagId);
 
 	public void deleteDiary(int id);
 	

@@ -29,6 +29,8 @@ public class DiaryWithChatController {
 	public String showList(Model model) {
 		int memberId = rq.getLoginedMemberId();
 		List<DiaryWithChat> items = diaryWithChatService.getForPrintDiaryWithChats(memberId);
+		List<DiaryWithChat> diaries = diaryWithChatService.getDiaryOnly(memberId);
+		List<DiaryWithChat> chats = diaryWithChatService.getChatOnly(memberId);
 		
 	    LocalDate now = LocalDate.now();
 	    model.addAttribute("year", now.getYear());

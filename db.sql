@@ -27,6 +27,14 @@ CREATE TABLE `chara` (
   `image` CHAR(100)
 );
 
+# 동물 캐릭터
+INSERT INTO chara
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '토끼',
+`content` = '토끼다',
+image = '/resource/img/muRabbit.png';
+
 CREATE TABLE `charaEmo` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `charaId` INT(10) UNSIGNED NOT NULL,
@@ -34,6 +42,14 @@ CREATE TABLE `charaEmo` (
   `emoType` VARCHAR(50) NOT NULL,
   `image` VARCHAR(100) NOT NULL
 );
+
+# 캐릭터 감정 이미지
+INSERT INTO charaEmo
+SET charaId = 1,
+emoId = 1,
+emoType = '기쁨',
+image = '/resource/img/happyRabbit.png';
+
 
 CREATE TABLE `emoTag` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,

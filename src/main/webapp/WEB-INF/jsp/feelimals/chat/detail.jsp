@@ -109,14 +109,11 @@ body {
 			<div class="msg him">오늘 무슨 일이 있었어?</div>
 
 			<c:forEach var="item" items="${messages}">
-				<c:choose>
-					<c:when test="${item.thisChat}">
-						<div class="msg you">${item.body}</div>
-					</c:when>
-					<c:otherwise>
-						<div class="msg him">${item.reply}</div>
-					</c:otherwise>
-				</c:choose>
+
+				<div class="msg you">${item.body}</div>
+
+				<div class="msg him">${item.aiReply}</div>
+
 			</c:forEach>
 		</div>
 
@@ -147,7 +144,6 @@ body {
 			if (message === "")
 				return;
 
-			
 			const chatBox = document.getElementById("chatBox");
 			const userMsg = document.createElement("div");
 			userMsg.className = "msg you";

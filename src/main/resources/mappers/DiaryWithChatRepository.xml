@@ -18,17 +18,65 @@
 		cd.regDate,
 		cd.updateDate,
 		cd.delStatus,
-		ar.reply AS aiReplyBody,
+		ar.reply AS
+		aiReply,
 		ar.regDate AS aiReplyRegDate
 		FROM chatDiary AS cd
-		LEFT JOIN aiReply AS ar 
+		LEFT JOIN
+		aiReply AS ar
 		ON cd.id = ar.chatdiaryId
 		WHERE cd.memberId = #{memberId}
-		AND cd.delStatus = 0
+		AND cd.delStatus
+		= 0
 		ORDER BY cd.id DESC
 
 	</select>
 
+	<!-- 채팅만 뽑기 -->
+	<select id="getChatOnly" resultType="DiaryWithChat">
+		SELECT
+		cd.id,
+		cd.memberId,
+		cd.sessionId,
+		cd.body,
+		cd.thisChat,
+		cd.emoTagId,
+		cd.regDate,
+		cd.updateDate,
+		cd.delStatus,
+		ar.reply AS aiReply,
+		ar.regDate AS aiReplyRegDate
+		FROM chatDiary AS cd
+		LEFT JOIN aiReply AS ar
+		ON cd.id = ar.chatdiaryId
+		WHERE cd.memberId = #{memberId}
+		AND cd.thisChat = TRUE
+		AND cd.delStatus = 0
+		ORDER BY cd.id DESC
+	</select>
+
+	<!-- 일기만 뽑기 -->
+	<select id="getDiaryOnly" resultType="DiaryWithChat">
+		SELECT
+		cd.id,
+		cd.memberId,
+		cd.sessionId,
+		cd.body,
+		cd.thisChat,
+		cd.emoTagId,
+		cd.regDate,
+		cd.updateDate,
+		cd.delStatus,
+		ar.reply AS aiReply,
+		ar.regDate AS aiReplyRegDate
+		FROM chatDiary AS cd
+		LEFT JOIN aiReply AS ar
+		ON cd.id = ar.chatdiaryId
+		WHERE cd.memberId = #{memberId}
+		AND cd.thisChat = FALSE
+		AND cd.delStatus = 0
+		ORDER BY cd.id DESC
+	</select>
 
 
 </mapper>

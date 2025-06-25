@@ -84,14 +84,17 @@ body {
 		<div class="chat-box" id="chatBox">
 
 			<!-- 캐릭터가 먼저 말하기 -->
-			 <div class="msg him">오늘 어떻게 보냈어?</div> 
+			<div class="w-28 h-28 chat-msg-wrapper ai">
+				<img src="/resource/img/muRabbit.png" class="character-img" alt="AI 캐릭터" />
+				<div class="msg him">오늘 어떻게 보냈어?</div>
+			</div>
 
-			<c:forEach var="msg" items="${messages}">
-				<c:if test="${msg.thisChat}">
-					<div class="msg you">${msg.body}</div>
+			<c:forEach var="item" items="${messages}">
+				<c:if test="${item.thisChat}">
+					<div class="msg you">${item.body}</div>
 				</c:if>
-				<c:if test="${not empty msg.aiReply}">
-					<div class="msg him">${msg.aiReply}</div>
+				<c:if test="${not empty item.aiReply}">
+					<div class="msg him">${item.aiReply}</div>
 				</c:if>
 			</c:forEach>
 		</div>
@@ -104,11 +107,8 @@ body {
 	</div>
 
 	<script>
-	
-	window.sessionId = "${param.sessionId}";
-	
+		window.sessionId = "${param.sessionId}";
 
-	
 		/* function sendMessage() {
 			const input = document.getElementById("userInput");
 			const message = input.value.trim();
