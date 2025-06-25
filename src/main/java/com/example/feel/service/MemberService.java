@@ -14,7 +14,7 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	public ResultData<Integer> doJoin(String loginId, String loginPw, String nickname, String email) {
+	public ResultData<Integer> doJoin(String loginId, String loginPw, String nickname, String email, int charaId) {
 
 		Member existsMember = getMemberByLoginId(loginId);
 		System.out.println("existsMember: " + existsMember);
@@ -24,7 +24,7 @@ public class MemberService {
 		}
 
 
-		memberRepository.doJoin(loginId, loginPw, nickname, email);
+		memberRepository.doJoin(loginId, loginPw, nickname, email, charaId);
 
 		int id = memberRepository.getLastInsertId();
 

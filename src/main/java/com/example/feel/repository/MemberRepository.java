@@ -7,7 +7,7 @@ import com.example.feel.vo.Member;
 @Mapper
 public interface MemberRepository {
 
-	public void doJoin(String loginId, String loginPw, String nickname, String email);
+	public void doJoin(String loginId, String loginPw, String nickname, String email, int charaId);
 
 	public Member getMemberByLoginId(String loginId);
 

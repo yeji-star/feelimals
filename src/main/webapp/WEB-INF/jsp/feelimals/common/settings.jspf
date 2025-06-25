@@ -3,41 +3,89 @@
 
 <link rel="stylesheet" href="/resource/style.css" />
 
-<body>
-	<!-- ✅ 배경 클릭 시 닫히는 오버레이 (body 바로 아래에 있어야 함!) -->
-	<div id="settingOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-40 hidden" onclick="closeSetting()"></div>
 
-	<!-- ✅ 설정 패널 (지금 쓰는 거 그대로 유지) -->
-	<div id="settingPanel"
-		class="fixed top-0 right-0 w-[250px] h-full bg-[#FFD8B1] z-50 
+
+<!-- 배경 클릭 시 닫히는 오버레이 (body 바로 아래에 있어야 함!) -->
+<div id="settingOverlay" class="fixed inset-0 bg-black bg-opacity-30 z-40 hidden" onclick="closeSetting()"></div>
+
+<!-- 설정 패널 -->
+<div id="settingPanel"
+	class="fixed top-0 right-0 w-[300px] h-full bg-[#FFD8B1] z-50 
             transform translate-x-full opacity-0 pointer-events-none 
             transition-all duration-300 ease-in-out shadow-lg"
-		onclick="event.stopPropagation()">
-		<div class="flex justify-between items-center p-4 font-bold border-b border-orange-300">
-			<span>설정</span>
-			<button onclick="closeSetting()" class="text-xl">&times;</button>
-		</div>
-		<ul class="p-4 space-y-4 text-lg">
-			<li>
-				<i class="fas fa-user"></i>
-				프로필
-			</li>
-			<li>
-				<i class="fas fa-paw"></i>
-				동물 캐릭터
-			</li>
-			<li>
-				<i class="fas fa-user-friends"></i>
-				계정
-			</li>
-			<li>
-				<i class="fas fa-bell"></i>
-				알림
-			</li>
-		</ul>
-	</div>
+	onclick="event.stopPropagation()">
 
-</body>
+	<div class="flex justify-between items-center p-4 font-bold border-b border-orange-300">
+		<span>설정</span>
+		<button onclick="closeSetting()" class="text-xl">&times;</button>
+	</div>
+	<ul class="p-4 space-y-4 text-lg">
+		<li>
+			<i class="fas fa-user"></i>
+			프로필
+		</li>
+		<!-- 동물 캐릭터 -->
+		<li class="cursor-pointer" onclick="toggleCharacterMenu()">
+			<i class="fas fa-paw"></i>
+			동물 캐릭터
+			<ul id="characterMenu" class="ml-6 mt-2 space-y-2 hidden transition-all duration-300">
+				<c:choose>
+					<c:when test="${rq.loginedMember.charaId == 1}">
+						<li class="font-bold text-orange-500">🐰 토끼!</li>
+					</c:when>
+					<c:otherwise>
+						<li class="cursor-pointer hover:underline" onclick="selectCharacter(1)">🐰 토끼</li>
+					</c:otherwise>
+				</c:choose>
+
+				<c:choose>
+					<c:when test="${rq.loginedMember.charaId == 2}">
+						<li class="font-bold text-orange-500">🦉 부엉이!</li>
+					</c:when>
+					<c:otherwise>
+						<li class="cursor-pointer hover:underline" onclick="selectCharacter(2)">🦉 부엉이</li>
+					</c:otherwise>
+				</c:choose>
+
+				<c:choose>
+					<c:when test="${rq.loginedMember.charaId == 3}">
+						<li class="font-bold text-orange-500">🐱 고양이!</li>
+					</c:when>
+					<c:otherwise>
+						<li class="cursor-pointer hover:underline" onclick="selectCharacter(3)">🐱 고양이</li>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+		</li>
+		<li>
+			<i class="fas fa-user-friends"></i>
+			계정
+		</li>
+		<li>
+			<i class="fas fa-bell"></i>
+			알림
+		</li>
+	</ul>
+</div>
+
+<script>
+	function toggleCharacterMenu() {
+		const menu = document.getElementById("characterMenu");
+		menu.classList.toggle("hidden");
+	}
+
+	function selectCharacter(animal) {
+		alert(`${animal} 선택됨`);
+
+		// 여기서 Ajax 호출 등으로 서버에 캐릭터 변경 요청 가능
+		// 예시:
+		// fetch("/feelimals/api/updateCharacter", { method: "POST", body: JSON.stringify({ character: animal }) })
+
+		// 변경 후 설정창 닫기 등 UI 처리도 가능
+	}
+</script>
+
+
 
 
 

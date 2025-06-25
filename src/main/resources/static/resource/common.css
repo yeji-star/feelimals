@@ -18,6 +18,10 @@ html>body {
 	font-family: 'GowunDodum-Regular', sans;
 }
 
+body {
+	overflow-x: hidden;
+}
+
 a {
 	text-decoration: none;
 }

@@ -16,10 +16,20 @@
 			<button onclick="toggleJoin()" class="absolute top-2 right-2 text-gray-400 hover:text-gray-700">&times;</button>
 			<h2 class="text-lg font-bold text-gray-700">회원가입</h2>
 			<form action="/feelimals/member/doJoin" method="post" target="_top" class="flex flex-col space-y-3">
+				<!-- 아이디 -->
 				<input type="text" name="loginId" placeholder="아이디" class="px-4 py-2 border rounded-md">
+				<!-- 비밀번호 -->
 				<input type="password" name="loginPw" placeholder="비밀번호" class="px-4 py-2 border rounded-md">
+				<!-- 닉네임 -->
 				<input type="text" name="nickname" placeholder="닉네임" class="px-4 py-2 border rounded-md">
+				<!-- 이메일 -->
 				<input type="text" name="email" placeholder="이메일" class="px-4 py-2 border rounded-md">
+				<!-- 추가: 캐릭터 선택 -->
+				<select name="charaId" class="px-4 py-2 border rounded-md">
+					<option value="1">🐰 토끼</option>
+					<option value="2">🦉 부엉이</option>
+					<option value="3">🐱 고양이</option>
+				</select>
 				<button type="submit" class="bg-[#FFA852] text-white px-4 py-2 rounded-full hover:bg-[#ff9444] transition">회원가입</button>
 			</form>
 		</div>

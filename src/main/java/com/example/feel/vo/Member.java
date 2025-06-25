@@ -20,6 +20,7 @@ public class Member {
 	private String loginPw;
 	private String nickname;
 	private String email;
+	private int charaId;
 	private boolean delStatus;
 	private LocalDateTime delDate;
 

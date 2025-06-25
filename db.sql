@@ -4,6 +4,7 @@ DROP DATABASE IF EXISTS `feelimals`;
 CREATE DATABASE `feelimals`;
 USE `feelimals`;
 
+# 사용자
 CREATE TABLE `member` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `regDate` DATETIME NOT NULL,
@@ -12,12 +13,13 @@ CREATE TABLE `member` (
   `loginPw` VARCHAR(100) NOT NULL,
   `nickname` VARCHAR(50) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
+  charaId INT(10) UNSIGNED NOT NULL COMMENT '자신이 정한 동물 캐릭터 (디폴트는 토끼)',
   `memberImage` VARCHAR(255),
   `delStatus` TINYINT(1) NOT NULL DEFAULT 0,
   `delDate` DATETIME
 );
 
-
+# 동물 캐릭터
 CREATE TABLE `chara` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `regDate` DATETIME NOT NULL,
@@ -27,54 +29,18 @@ CREATE TABLE `chara` (
   `image` CHAR(100)
 );
 
-# 동물 캐릭터
-INSERT INTO chara
-SET regDate = NOW(),
-updateDate = NOW(),
-`name` = '토끼',
-`content` = '토끼다',
-image = '/resource/img/muRabbit.png';
-
+#캐릭터 감정
 CREATE TABLE `charaEmo` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `charaId` INT(10) UNSIGNED NOT NULL,
-  `emoId` INT(10) UNSIGNED NOT NULL,
+  `emoTagId` INT(10) UNSIGNED NOT NULL,
   `emoType` VARCHAR(50) NOT NULL,
   `image` VARCHAR(100) NOT NULL
 );
 
-# 캐릭터 감정 이미지
-INSERT INTO charaEmo
-SET charaId = 1,
-emoId = 1,
-emoType = '기쁨',
-image = '/resource/img/happyRabbit.png';
+SHOW CREATE TABLE charaEmo;
 
-INSERT INTO charaEmo
-SET charaId = 1,
-emoId = 2,
-emoType = '슬픔',
-image = '/resource/img/sadRabbit.png';
-
-INSERT INTO charaEmo
-SET charaId = 1,
-emoId = 3,
-emoType = '분노',
-image = '/resource/img/angryRabbit.png';
-
-INSERT INTO charaEmo
-SET charaId = 1,
-emoId = 4,
-emoType = '불안',
-image = '/resource/img/anxRabbit.png';
-
-INSERT INTO charaEmo
-SET charaId = 1,
-emoId = 5,
-emoType = '분류안함',
-image = '/resource/img/muRabbit.png';
-
-
+# 감정 태그
 CREATE TABLE `emoTag` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `label` CHAR(20) UNIQUE NOT NULL,
@@ -82,6 +48,7 @@ CREATE TABLE `emoTag` (
   `color` CHAR(10) NOT NULL
 );
 
+# 채팅과 일기 통합
 CREATE TABLE `chatDiary` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `memberId` INT(10) UNSIGNED NOT NULL,
@@ -96,6 +63,7 @@ CREATE TABLE `chatDiary` (
   `delDate` DATETIME
 );
 
+# ai와 말을 주고받는 하나의 대화 세션
 CREATE TABLE `chatSession` (
 `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
 `memberId` INT(10) UNSIGNED NOT NULL,
@@ -106,6 +74,7 @@ delStatus TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0이면 삭제 안됨, 1이면 
 delDate DATETIME
 );
 
+# 이후 추가할 다이어리 감정 점수
 CREATE TABLE `diaryEmo` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `chatdiaryId` INT(10) UNSIGNED NOT NULL,
@@ -127,6 +96,7 @@ CREATE TABLE `emotionFeedback` (
   `regDate` DATETIME NOT NULL
 );
 
+# ai 답변
 CREATE TABLE `aiReply` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `chatDiaryId` INT(10) UNSIGNED NOT NULL,
@@ -138,17 +108,7 @@ CREATE TABLE `aiReply` (
   `delDate` DATETIME
 );
 
-CREATE TABLE `calendar` (
-  `date` DATE PRIMARY KEY NOT NULL,
-  `year` INT(10) NOT NULL,
-  `month` INT(10) NOT NULL,
-  `day` INT(10) NOT NULL,
-  `dayName` CHAR(10) NOT NULL,
-  `isWeekend` BOOLEAN,
-  `isHoliday` BOOLEAN DEFAULT FALSE
-);
-
-
+# 설정
 CREATE TABLE `settings` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `memberId` INT(10) UNSIGNED NOT NULL,
@@ -171,7 +131,9 @@ ALTER TABLE `diaryEmo` ADD FOREIGN KEY (`chatdiaryId`) REFERENCES `chatDiary` (`
 
 ALTER TABLE `diaryEmo` ADD FOREIGN KEY (`emoTagId`) REFERENCES `emoTag` (`id`);
 
-ALTER TABLE `charaEmo` ADD FOREIGN KEY (`emoId`) REFERENCES `emoTag` (`id`);
+ALTER TABLE `charaEmo` ADD FOREIGN KEY (`emoTagId`) REFERENCES `emoTag` (`id`);
+
+ALTER TABLE `member` ADD FOREIGN KEY (`charaId`) REFERENCES `chara` (`id`);
 
 ALTER TABLE `aiReply` ADD FOREIGN KEY (`chatdiaryId`) REFERENCES `chatDiary` (`id`);
 
@@ -182,6 +144,28 @@ ALTER TABLE `settings` ADD FOREIGN KEY (`charaId`) REFERENCES `chara` (`id`);
 
 SHOW TABLES;
 
+# 동물 캐릭터
+INSERT INTO chara
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '토끼',
+`content` = '토끼다',
+image = '/resource/img/rabbit_5.png';
+
+INSERT INTO chara
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '부엉이',
+`content` = '부엉이다',
+image = '/resource/img/owl_5.png';
+
+INSERT INTO chara
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '고양이',
+`content` = '고양이다',
+image = '/resource/img/cat_5.png';
+
 # 테스트 데이터 (유저)
 
 INSERT INTO `member`
@@ -190,7 +174,8 @@ SET regDate = NOW(),
 	loginId = 'test1',
 	loginPw = 'test1',
 	nickname = 'test1',
-	email = 'test1@gmail.com';
+	email = 'test1@gmail.com',
+	charaId = 1;
 	
 INSERT INTO `member`
 SET regDate = NOW(),
@@ -198,7 +183,8 @@ SET regDate = NOW(),
 	loginId = 'test2',
 	loginPw = 'test2',
 	nickname = 'test2',
-	email = 'test2@gmail.com';
+	email = 'test2@gmail.com',
+	charaId = 1;
 
 # 테스트 데이터 (감정 태그)
 
@@ -290,6 +276,46 @@ regDate = NOW(),
 updateDate = NOW(),
 model = 'gpt-3.5-turbo',
 delStatus = 0;
+
+# 캐릭터 감정 이미지
+# 토끼
+INSERT INTO charaEmo
+SET charaId = 1,
+emoTagId = 1,
+emoType = '기쁨',
+image = '/resource/img/rabbit_1.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoTagId = 2,
+emoType = '슬픔',
+image = '/resource/img/rabbit_2.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoTagId = 3,
+emoType = '분노',
+image = '/resource/img/rabbit_3.png';
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoTagId = 4,
+emoType = '불안',
+image = '/resource/img/rabbit_4.png';
+
+#부엉이
+INSERT INTO charaEmo
+SET charaId = 2,
+emoTagId = 1,
+emoType = '기쁨',
+image = '/resource/img/owl_1.png';
+
+
+INSERT INTO charaEmo
+SET charaId = 1,
+emoTagId = 5,
+emoType = '분류안함',
+image = '/resource/img/rabbit_5.png';
 
 SELECT * FROM aiReply WHERE chatdiaryId IN (SELECT id FROM chatDiary WHERE sessionId = 3);
 

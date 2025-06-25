@@ -35,7 +35,8 @@ public class UserMemberController {
 
 	@RequestMapping("/feelimals/member/doJoin")
 	@ResponseBody
-	public String doJoin(HttpServletRequest req, String loginId, String loginPw, String nickname, String email) {
+	public String doJoin(HttpServletRequest req, String loginId, String loginPw, String nickname, String email,
+			@RequestParam(defaultValue = "1") int charaId) {
 
 		if (Ut.isEmptyOrNull(loginId)) {
 
@@ -57,7 +58,7 @@ public class UserMemberController {
 			return Ut.jsHistoryBack(null, "이메일을 입력해줘.");
 		}
 
-		ResultData<Integer> joinRd = memberService.doJoin(loginId, loginPw, nickname, email);
+		ResultData<Integer> joinRd = memberService.doJoin(loginId, loginPw, nickname, email, charaId);
 
 		if (joinRd.isFail()) {
 			return Ut.jsHistoryBack(joinRd.getResultCode(), joinRd.getMsg());

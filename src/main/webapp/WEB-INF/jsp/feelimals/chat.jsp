@@ -5,7 +5,7 @@
 <head>
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
 <%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
-<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+
 
 <title>대화중</title>
 <link rel="stylesheet" href="/resource/style.css">
@@ -101,7 +101,9 @@ body {
 }
 </style>
 </head>
-<body class="bg-[#FAF7F5] min-h-screen">
+<body class="bg-[#FAF7F5] min-h-screen" style="overflow-x: hidden; position: relative;">
+
+<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
 
 	<div class="chat-container">
 		<div class="chat-box" id="chatBox">

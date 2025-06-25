@@ -27,6 +27,31 @@ function toggleEditMenu() {
 	menu.classList.toggle("hidden");
 }
 
+// 동물 캐릭터 선택
+function selectCharacter(animalId) {
+  fetch("/feelimals/setting/changeChara", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `charaId=${animalId}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.resultCode === "S-1") {
+      alert("캐릭터가 변경되었습니다.");
+      location.reload(); // 또는 캐릭터 이미지만 변경
+    } else {
+      alert("실패: " + data.msg);
+    }
+  });
+}
+
+
+
+////////////////////////////////////////////////
+
+
 // 채팅 세션ID(서버에서 새로 받으면 자동 갱신)
 var sessionId = window.sessionId || "";
 

@@ -6,7 +6,7 @@
 <!-- 상단 메뉴 -->
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
 <%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
-<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+
 <meta charset="UTF-8">
 <title>${pageTitle}</title>
 
@@ -72,13 +72,13 @@ body, main {
 
 	<div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;"></div>
 
+	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+	
 	<!-- 로그인 팝업창 -->
 	<c:if test="${!rq.isLogined()}">
 		<%@ include file="/WEB-INF/jsp/feelimals/member/popup-login.jspf"%>
 		<%@ include file="/WEB-INF/jsp/feelimals/member/popup-join.jspf"%>
 	</c:if>
-
-
 
 	<!-- 중앙... 메인 -->
 	<main class="flex-grow flex items-center justify-center text-center">
