@@ -23,6 +23,7 @@ function openSetting() {
 	}, 0);
 }
 
+// 설정 닫기
 function closeSetting() {
 	const panel = document.getElementById("settingPanel");
 
@@ -38,10 +39,11 @@ function closeSetting() {
 	});
 }
 
+// 화면 바깥에서 클릭
 function handleOutsideClick(e) {
 	const panel = document.getElementById("settingPanel");
-	if (!panel.contains(e.target)) {
-		closeSetting();
+	if (!panel.contains(e.target)) { // 패널 공간이 아닌 곳을 클릭시
+		closeSetting(); // closeSetting 실행
 	}
 }
 
@@ -73,7 +75,6 @@ function selectCharacter(animalId) {
 			alert("서버 오류: " + err);
 		});
 }
-
 
 
 ////////////////////////////////////////////////
@@ -177,6 +178,7 @@ function renderMessages(messages) {
 	}, 0);
 }
 
+// 대화 수정 시, 입력창 활성화 (이후 추가 예정)
 function continueChat(sessionId) {
 	// 입력창 활성화
 	document.getElementById('userInput').disabled = false;
