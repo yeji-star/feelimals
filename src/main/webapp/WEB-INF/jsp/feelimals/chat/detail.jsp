@@ -159,18 +159,7 @@ body {
 			<button onclick="sendMessage()" disabled>보내기</button>
 		</div>
 	</div>
-
-	<!-- 버튼 -->
-	<div class="btn-group">
-		<a href="/feelimals/chatDiary/list" class="btn">목록</a>
-		<td style="text-align: center;">
-			<c:if test="${chat.userCanDelete }">
-				<a class="btn btn-outline btn-xs btn-error" onclick="if(confirm('정말 삭제할 거야?') == false) return false;"
-					href="../chat/deleteChat?id=${id }">삭제</a>
-			</c:if>
-		</td>
-	</div>
-	</div>
+	
 
 
 	<script>
