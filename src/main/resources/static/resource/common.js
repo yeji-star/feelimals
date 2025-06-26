@@ -9,16 +9,40 @@ $('select[data-value]').each(function(index, el) {
 
 // 설정 열기
 function openSetting() {
-	document.getElementById("settingOverlay").classList.remove("hidden");
 	const panel = document.getElementById("settingPanel");
-	panel.classList.remove("translate-x-full", "opacity-0", "pointer-events-none");
+
+	// 기존 숨김 클래스 제거
+	panel.classList.remove("hidden", "animate__slideOutRight");
+
+	// slideInLeft 애니메이션 추가
+	panel.classList.add("animate__animated", "animate__slideInRight");
+
+	// 패널 바깥 클릭 감지 시작
+	setTimeout(() => {
+		document.addEventListener("mousedown", handleOutsideClick);
+	}, 0);
 }
 
-// 설정 닫기
 function closeSetting() {
-	document.getElementById("settingOverlay").classList.add("hidden");
 	const panel = document.getElementById("settingPanel");
-	panel.classList.add("translate-x-full", "opacity-0", "pointer-events-none");
+
+	// slideOutRight 애니메이션 적용
+	panel.classList.remove("animate__slideInRight");
+	panel.classList.add("animate__slideOutRight");
+
+	// 패널 닫힐 때 바깥 클릭 감지 제거
+	panel.addEventListener("animationend", function handler() {
+		panel.classList.add("hidden");
+		document.removeEventListener("mousedown", handleOutsideClick);
+		panel.removeEventListener("animationend", handler);
+	});
+}
+
+function handleOutsideClick(e) {
+	const panel = document.getElementById("settingPanel");
+	if (!panel.contains(e.target)) {
+		closeSetting();
+	}
 }
 
 // 수정/삭제 메뉴 토글

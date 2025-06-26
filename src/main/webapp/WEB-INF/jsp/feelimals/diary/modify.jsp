@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
-<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+
 <meta charset="UTF-8">
 <title>일기 수정</title>
 <script src="https://cdn.tailwindcss.com"></script>
@@ -25,6 +25,9 @@
 </head>
 <body class="bg-[#FAF7F5] min-h-screen">
 
+	<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+	
 	<main class="flex justify-center items-center py-16">
 		<form action="/feelimals/diary/doModify" method="post" onsubmit="return DiaryModify__submit(this);"
 			class="relative w-full max-w-2xl bg-[#FFF3E9] p-6 rounded-2xl shadow space-y-4">

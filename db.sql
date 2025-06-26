@@ -112,8 +112,6 @@ CREATE TABLE `settings` (
 
 ALTER TABLE `charaEmo` ADD FOREIGN KEY (`charaId`) REFERENCES `chara` (`id`);
 
-ALTER TABLE `emotionFeedback` ADD FOREIGN KEY (`emoTagId`) REFERENCES `emoTag` (`id`);
-
 ALTER TABLE `settings` ADD FOREIGN KEY (`memberId`) REFERENCES `member` (`id`);
 
 ALTER TABLE `chatDiary` ADD FOREIGN KEY (`memberId`) REFERENCES `member` (`id`);
@@ -158,6 +156,22 @@ updateDate = NOW(),
 `name` = '고양이',
 `content` = '고양이다',
 image = '/resource/img/chara_3_5.png';
+
+INSERT INTO chara
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '개',
+`content` = '개다',
+image = '/resource/img/chara_4_5.png';
+
+INSERT INTO chara
+SET regDate = NOW(),
+updateDate = NOW(),
+`name` = '곰',
+`content` = '곰이다',
+image = '/resource/img/chara_5_5.png';
+
+SELECT * FROM chara;
 
 # 테스트 데이터 (유저)
 
@@ -308,6 +322,123 @@ SET charaId = 2,
 emoTagId = 1,
 emoType = '기쁨',
 image = '/resource/img/chara_2_1.png';
+
+INSERT INTO charaEmo
+SET charaId = 2,
+emoTagId = 2,
+emoType = '슬픔',
+image = '/resource/img/chara_2_2.png';
+
+INSERT INTO charaEmo
+SET charaId = 2,
+emoTagId = 3,
+emoType = '분노',
+image = '/resource/img/chara_2_3.png';
+
+INSERT INTO charaEmo
+SET charaId = 2,
+emoTagId = 4,
+emoType = '불안',
+image = '/resource/img/chara_2_4.png';
+
+INSERT INTO charaEmo
+SET charaId = 2,
+emoTagId = 5,
+emoType = '분류안함',
+image = '/resource/img/chara_2_5.png';
+
+#고양이
+INSERT INTO charaEmo
+SET charaId = 3,
+emoTagId = 1,
+emoType = '기쁨',
+image = '/resource/img/chara_3_1.png';
+
+INSERT INTO charaEmo
+SET charaId = 3,
+emoTagId = 2,
+emoType = '슬픔',
+image = '/resource/img/chara_3_2.png';
+
+INSERT INTO charaEmo
+SET charaId = 3,
+emoTagId = 3,
+emoType = '분노',
+image = '/resource/img/chara_3_3.png';
+
+INSERT INTO charaEmo
+SET charaId = 3,
+emoTagId = 4,
+emoType = '불안',
+image = '/resource/img/chara_3_4.png';
+
+INSERT INTO charaEmo
+SET charaId = 3,
+emoTagId = 5,
+emoType = '분류안함',
+image = '/resource/img/chara_3_5.png';
+
+#개
+INSERT INTO charaEmo
+SET charaId = 4,
+emoTagId = 1,
+emoType = '기쁨',
+image = '/resource/img/chara_4_1.png';
+
+INSERT INTO charaEmo
+SET charaId = 4,
+emoTagId = 2,
+emoType = '슬픔',
+image = '/resource/img/chara_4_2.png';
+
+INSERT INTO charaEmo
+SET charaId = 4,
+emoTagId = 3,
+emoType = '분노',
+image = '/resource/img/chara_4_3.png';
+
+INSERT INTO charaEmo
+SET charaId = 4,
+emoTagId = 4,
+emoType = '불안',
+image = '/resource/img/chara_4_4.png';
+
+INSERT INTO charaEmo
+SET charaId = 4,
+emoTagId = 5,
+emoType = '분류안함',
+image = '/resource/img/chara_4_5.png';
+
+#곰
+INSERT INTO charaEmo
+SET charaId = 5,
+emoTagId = 1,
+emoType = '기쁨',
+image = '/resource/img/chara_5_1.png';
+
+INSERT INTO charaEmo
+SET charaId = 5,
+emoTagId = 2,
+emoType = '슬픔',
+image = '/resource/img/chara_5_2.png';
+
+INSERT INTO charaEmo
+SET charaId = 5,
+emoTagId = 3,
+emoType = '분노',
+image = '/resource/img/chara_5_3.png';
+
+INSERT INTO charaEmo
+SET charaId = 5,
+emoTagId = 4,
+emoType = '불안',
+image = '/resource/img/chara_5_4.png';
+
+INSERT INTO charaEmo
+SET charaId = 5,
+emoTagId = 5,
+emoType = '분류안함',
+image = '/resource/img/chara_5_5.png';
 
 SELECT * FROM aiReply WHERE chatdiaryId IN (SELECT id FROM chatDiary WHERE sessionId = 3);
 

@@ -2,10 +2,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
-<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+
 
 <body class="bg-[#FAF7F5] min-h-screen">
 
+	<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
 
 	<!-- 본문 -->
 	<div class="relative px-6 py-12 ">

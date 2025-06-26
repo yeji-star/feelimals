@@ -5,8 +5,7 @@
 <c:set var="pageTitle" value="일기 목록" />
 <!-- 상단 메뉴 -->
 <%@ include file="/WEB-INF/jsp/feelimals/common/head.jspf"%>
-<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
-<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+
 <style>
 @
 keyframes fadeDrop { 0% {
@@ -16,26 +15,46 @@ keyframes fadeDrop { 0% {
 
 100
 
+
+
 %
 {
 transform
 
+
+
 :
+
+
 
 translateY
 
+
+
 (
+
+
 
 0
 
+
+
 )
+
+
 
 ;
 opacity
 
+
+
 :
 
+
+
 1
+
+
 
 ;
 }
@@ -54,6 +73,9 @@ opacity
 </style>
 
 <body class="bg-[#FAF7F5] min-h-screen">
+
+	<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
+	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
 
 	<!-- 달 정보 + 리스트 + 캐릭터 -->
 	<div class="flex justify-center gap-6 items-start px-10 pt-6">
@@ -107,7 +129,8 @@ opacity
 		<!-- 캐릭터 + 말풍선 (리스트 바로 오른쪽 하단) -->
 		<div class="flex flex-col items-end self-end">
 			<div class="text-xs text-gray-700 mb-1">최선을 다했구나</div>
-			<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" alt="캐릭터" alt="AI 캐릭터" class="character-img w-30 h-30 object-contain" />
+			<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" alt="캐릭터" alt="AI 캐릭터"
+				class="character-img w-30 h-30 object-contain" />
 		</div>
 
 	</div>
