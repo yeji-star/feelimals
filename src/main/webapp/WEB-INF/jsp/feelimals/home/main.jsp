@@ -86,19 +86,19 @@ body, main {
 
 			<c:if test="${!rq.isLogined() }">
 				<!-- 캐릭터 이미지 -->
-				<div class="w-28 h-28 mb-7";">
+				<div class="w-40 h-40 mb-7";">
 					<img src="/resource/img/chara_1_5.png" />
 				</div>
 				<!-- 환영 메시지 -->
-				<div class="text-lg font-medium text-gray-800">나와 대화해보지 않을래?</div>
+				<div class="text-lg font-medium text-gray-800">나와 대화하지 않을래?</div>
 
 				<!-- 로그인 폼 버튼 -->
 				<button onclick="toggleLogin()"
-					class="animate__animated animate__fadeIn px-6 py-2 rounded-full bg-button hover:bg-[#ffc987] transition font-medium shadow-sm">로그인</button>
+					class="animate__animated animate__fadeIn px-6 py-2 rounded-full bg-button hover:bg-[#ffc987] transition font-medium shadow-sm">대화할래</button>
 
 				<!-- 회원가입 링크 -->
 				<div class="text-xs text-gray-600 mt-2">
-					계정이 없는 거야?
+					처음인 거야?
 					<a href="#" onclick="toggleJoin()" class="text-orange-500 hover:underline">회원가입</a>
 				</div>
 			</c:if>

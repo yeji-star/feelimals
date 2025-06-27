@@ -1,6 +1,59 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="curUri" value="${pageContext.request.requestURI}" />
 
+<style>
+.menu-item.active {
+	color: #FFA726;
+	font-weight: bold;
+}
+</style>
+<!-- ✅ 헤더 -->
+<header class="bg-[#FFEBD3] rounded-b-xl px-6 py-4 flex items-center justify-between text-gray-700 text-base">
+	<a href="/" class="text-lg font-bold">LOGO</a>
+	<nav>
+		<ul class="flex gap-6 text-xl items-center">
+			<li>
+				<a href="/feelimals/chat"
+					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/chat') ? ' active' : ''}"> 대화 </a>
+			</li>
+			<li>
+				<a href="/feelimals/diary/write"
+					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/diary/write') ? ' active' : ''}"> 일기
+				</a>
+			</li>
+			<li>
+				<a href="/feelimals/chatDiary/list"
+					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/chatDiary/list') ? ' active' : ''}">
+					목록 </a>
+			</li>
+			<li>
+				<a href="/feelimals/calendar"
+					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/calendar') ? ' active' : ''}"> 달력 </a>
+			</li>
+			<li>
+				<button type="button" onclick="openSetting()" class="hover:underline focus:outline-none">
+					<i class="fa-solid fa-gear"></i>
+				</button>
+			</li>
+		</ul>
+	</nav>
+</header>
+
+
+
+
+<%-- <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="curPath" value="${pageContext.request.servletPath}" />
+
+<style>
+.menu-item.active {
+	color: #FFA726;
+	font-weight: bold;
+}
+</style>
 <!-- ✅ 헤더 -->
 <header class="bg-[#FFEBD3] rounded-b-xl px-6 py-4 flex items-center justify-between text-gray-700 text-base">
 	<a href="/" class="text-lg font-bold">LOGO</a>
@@ -8,20 +61,22 @@
 	<nav>
 		<ul class="flex gap-6 text-xl items-center">
 			<li>
-				<a href="/feelimals/chat" class="hover:underline">대화</a>
+				<a href="/feelimals/chat" class="menu-item active hover:text-yellow-500">대화</a>
 			</li>
 			<li>
-				<a href="/feelimals/diary/write" class="hover:underline">일기</a>
+				<a href="/feelimals/diary/write" class="hover:text-yellow-500">일기</a>
 			</li>
 			<li>
-				<a href="/feelimals/chatDiary/list" class="hover:underline">목록</a>
+				<a href="/feelimals/chatDiary/list" class="hover:text-yellow-500">목록</a>
 			</li>
 			<li>
-				<a href="/feelimals/calendar" class="hover:underline">달력</a>
+				<a href="/feelimals/calendar" class="hover:text-yellow-500">달력</a>
 			</li>
 			<li>
-				<button type="button" onclick="openSetting()" class="hover:underline focus:outline-none">설정</button>
+				<button type="button" onclick="openSetting()" class="hover:underline focus:outline-none">
+					<i class="fa-solid fa-gear"></i>
+				</button>
 			</li>
 		</ul>
 	</nav>
-</header>
+</header> --%>

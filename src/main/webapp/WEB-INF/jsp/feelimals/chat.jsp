@@ -103,33 +103,34 @@ body {
 </head>
 <body class="bg-[#FAF7F5] min-h-screen" style="overflow-x: hidden; position: relative;">
 
-<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
+	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
 
 	<div class="chat-container">
 		<div class="chat-box" id="chatBox">
 
 			<!-- 캐릭터가 먼저 말하기 -->
 			<div class="chat-msg-wrapper ai">
-				<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" alt="AI 캐릭터" />
+				<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img w-50 h-50 object-contain" alt="AI 캐릭터" />
 				<div class="msg him">오늘 어떻게 보냈어?</div>
 			</div>
 
 			<c:forEach var="items" items="${messages}">
 				<c:if test="${items.thisChat}">
 					<div class="chat-msg-wrapper user">
-						<div class="msg you">${item.body}</div>
+						<div class="msg you">${items.body}</div>
 					</div>
 				</c:if>
 
 				<div class="chat-msg-wrapper ai">
 					<c:choose>
 						<c:when test="${not empty items.emoTagId}">
-							<img src="/resource/img/chara_${rq.loginedMember.charaId }_${items.emoTagId}.png" class="character-img" />
+							<img src="/resource/img/chara_${rq.loginedMember.charaId }_${items.emoTagId}.png" class="character-img" alt="AI 캐릭터" />
 						</c:when>
 						<c:otherwise>
-							<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" />
+							<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" alt="AI 캐릭터" />
 						</c:otherwise>
 					</c:choose>
+					<img src="/resource/img/chara_${rq.loginedMember.charaId }_${items.emoTagId}.png" class="character-img" alt="AI 캐릭터" />
 					<div class="msg him">${items.aiReply}</div>
 				</div>
 
@@ -145,6 +146,8 @@ body {
 
 	<script>
 		window.sessionId = "${param.sessionId}";
+		
+		window.charaId = "${rq.loginedMember.charaId}";
 
 		/* function sendMessage() {
 			const input = document.getElementById("userInput");

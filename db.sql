@@ -63,6 +63,11 @@ CREATE TABLE `chatDiary` (
   `delDate` DATETIME
 );
 
+SELECT * FROM aiReply;
+SELECT chatdiaryId, COUNT(*) FROM aiReply GROUP BY chatdiaryId HAVING COUNT(*) > 1;
+SELECT * FROM chatSession;
+SELECT * FROM chatDiary;
+
 # ai와 말을 주고받는 하나의 대화 세션
 CREATE TABLE `chatSession` (
 `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -73,6 +78,7 @@ updateDate DATETIME NOT NULL,
 delStatus TINYINT(1) NOT NULL DEFAULT 0 COMMENT '0이면 삭제 안됨, 1이면 삭제됨',
 delDate DATETIME
 );
+SELECT * FROM chatSession;
 
 # 이후 추가할 다이어리 감정 점수
 CREATE TABLE `diaryEmo` (
@@ -106,7 +112,6 @@ CREATE TABLE `settings` (
   `id` INT(10) UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT,
   `memberId` INT(10) UNSIGNED NOT NULL,
   `charaId` INT(10) UNSIGNED NOT NULL,
-  `alert` BOOLEAN NOT NULL DEFAULT TRUE,
   `updateDate` DATETIME NOT NULL
 );
 
@@ -171,13 +176,13 @@ updateDate = NOW(),
 `content` = '곰이다',
 image = '/resource/img/chara_5_5.png';
 
-SELECT * FROM chara;
+select * from chara;
 
 # 테스트 데이터 (유저)
 
-INSERT INTO `member`
-SET regDate = NOW(),
-	updateDate = NOW(),
+insert into `member`
+set regDate = now(),
+	updateDate = now(),
 	loginId = 'test1',
 	loginPw = 'test1',
 	nickname = 'test1',
@@ -225,7 +230,7 @@ SET
   icon = '❓',
   color = '#E0E0E0'; 
   
-SELECT * FROM emoTag;  
+select * from emoTag;  
   
 # 테스트 데이터 (일기)
 
@@ -251,36 +256,36 @@ SET
   
 # 테스트 데이터 (세션)
 
-INSERT INTO chatSession
-SET
+insert into chatSession
+set
 	memberId = 1,
 	title = '대화1',
-	regDate = NOW(),
-	updateDate = NOW();
+	regDate = now(),
+	updateDate = now();
   
 SELECT LAST_INSERT_ID();  
   
 # 테스트 데이터 (대화)
 
-INSERT INTO chatDiary
-SET 
+insert into chatDiary
+set 
 memberId = 1,
 sessionId = 1,
 `body` = '오늘 좀 힘들었어. 위로해줘.',
-thisChat = TRUE,
+thisChat = true,
 emoTagId = 2,
-regDate = NOW(),
-updateDate = NOW(),
+regDate = now(),
+updateDate = now(),
 delStatus = 0;
 
 # 테스트 데이터 (ai응답)
 
-INSERT INTO aiReply
-SET
+insert into aiReply
+set
 chatDiaryId = 1,
 reply = '힘들었구나.',
-regDate = NOW(),
-updateDate = NOW(),
+regDate = now(),
+updateDate = now(),
 model = 'gpt-3.5-turbo',
 delStatus = 0;
 
@@ -443,21 +448,21 @@ image = '/resource/img/chara_5_5.png';
 SELECT * FROM aiReply WHERE chatdiaryId IN (SELECT id FROM chatDiary WHERE sessionId = 3);
 
 
-SELECT *
-FROM `member`;
+select *
+from `member`;
 
 SELECT * FROM emoTag;
 SELECT * FROM chatDiary;
 
-DESC `member`;
+desc `member`;
 
 SELECT cd.id, cd.body, cd.sessionId, cd.thisChat, ar.reply
 FROM chatDiary cd
 LEFT JOIN aiReply ar ON ar.chatDiaryId = cd.id
 WHERE cd.sessionId = 1;
 
-SELECT * FROM chatDiary
-INNER JOIN chatSession
-ON chatDiary.sessionId = chatSession.id
-INNER JOIN aiReply
-ON aiReply.chatDiaryId = chatDiary.id;
+select * from chatDiary
+inner join chatSession
+on chatDiary.sessionId = chatSession.id
+inner join aiReply
+on aiReply.chatDiaryId = chatDiary.id;

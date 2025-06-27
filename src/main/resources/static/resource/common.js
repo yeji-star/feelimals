@@ -141,42 +141,60 @@ function sendMessage() {
 		});
 }
 
-// 메시지 1개씩 아래에 추가(중복 방지)
-function appendMessage({ type, body }) {
+// 메시지 1개씩 아래에 추가(중복 방지, 캐릭터 이미지 포함)
+function appendMessage({ type, body, emoTagId }) {
 	const chatBox = document.getElementById("chatBox");
-	// 마지막 메시지와 중복 체크 (같은 내용, 같은 타입이면 추가 X)
-	const lastMsg = chatBox.lastElementChild;
-	if (lastMsg && lastMsg.textContent === body &&
-		((type === "user" && lastMsg.classList.contains("you")) || (type === "ai" && lastMsg.classList.contains("him")))) {
-		return;
+
+	// 메시지 컨테이너
+	const wrapper = document.createElement("div");
+	wrapper.className = "chat-msg-wrapper " + (type === "user" ? "user" : "ai");
+
+	// 사용자 메시지 (오른쪽)
+	if (type === "user") {
+		const msgDiv = document.createElement("div");
+		msgDiv.className = "msg you";
+		msgDiv.textContent = body;
+		wrapper.appendChild(msgDiv);
+	} else {
+		// AI 메시지 (왼쪽) - 캐릭터 이미지 + 메시지
+		const img = document.createElement("img");
+		let charaId = window.charaId || 1; // 없으면 1(기본)
+		let emoId = emoTagId || 5; // 없으면 5(기본)
+		img.src = `/resource/img/chara_${charaId}_${emoId}.png`;
+		img.className = "character-img w-40 h-40";
+		img.alt = "AI 캐릭터";
+		wrapper.appendChild(img);
+
+		const msgDiv = document.createElement("div");
+		msgDiv.className = "msg him";
+		msgDiv.textContent = body;
+		wrapper.appendChild(msgDiv);
 	}
-	// 메시지 타입(사용자/AI)에 따라 CSS 다르게 적용
-	const div = document.createElement("div");
-	div.className = type === "user" ? "msg you" : "msg him";
-	div.textContent = body;
-	chatBox.appendChild(div);
+
+	chatBox.appendChild(wrapper);
 }
 
 // 전체 메시지(과거 대화) 복원하기 (새로고침, 입장시)
 function renderMessages(messages) {
 	const chatBox = document.getElementById("chatBox");
 	chatBox.innerHTML = ''; // 먼저 모두 비우기
-	if (!messages || messages.length === 0) { // 아무 대화 없을 시 ai의 말 추가
-		appendMessage({ type: "ai", body: "오늘 어떻게 보냈어?" });
+	if (!messages || messages.length === 0) {
+		appendMessage({ type: "ai", body: "오늘 어떻게 보냈어?", emoTagId: 5 });
 		return;
 	}
 	messages.forEach(msg => {
-		if (msg.isUser || msg.thisChat) {
+		if (msg.user) {
 			appendMessage({ type: "user", body: msg.body });
 		}
 		if (msg.aiReply && msg.aiReply.trim() !== "") {
-			appendMessage({ type: "ai", body: msg.aiReply });
+			appendMessage({ type: "ai", body: msg.aiReply, emoTagId: msg.emoTagId });
 		}
 	});
-	setTimeout(() => { // 채팅박스 갱신 시킴 (항상 맨마지막에)
+	setTimeout(() => {
 		chatBox.scrollTop = chatBox.scrollHeight;
 	}, 0);
 }
+
 
 // 대화 수정 시, 입력창 활성화 (이후 추가 예정)
 function continueChat(sessionId) {
@@ -202,9 +220,10 @@ if (inputBox) {
 document.addEventListener("DOMContentLoaded", function() {
 	const chatBox = document.getElementById("chatBox");
 	if (chatBox && chatBox.children.length === 0) {
-		appendMessage({ type: "ai", body: "오늘 어떻게 보냈어?" });
+		appendMessage({ type: "ai", body: "오늘 어떻게 보냈어?", emoTagId: 5 });
 	}
 });
+
 
 // ------- 아래는 밑줄 효과(기존과 동일) -------
 

@@ -58,32 +58,32 @@ body, main {
 				<button type="button" id="emoTagBtn-1"
 					class="emotag-btn w-14 h-14 rounded-full flex flex-col items-center justify-center bg-[#FFE082] text-2xl shadow border-2 border-transparent focus:outline-none ring-4 ring-orange-300 transition"
 					onclick="selectEmoTag(1)">
-					😊
+					<i class="fa-solid fa-paw" style="color: #ffcb2e;"></i>
 					<span class="block text-xs mt-1">기쁨</span>
 				</button>
 				<button type="button" id="emoTagBtn-2"
 					class="emotag-btn w-14 h-14 rounded-full flex flex-col items-center justify-center bg-[#90CAF9] text-2xl shadow border-2 border-transparent focus:outline-none transition"
 					onclick="selectEmoTag(2)">
-					😔
+					<i class="fa-solid fa-paw" style="color: #51abfb;"></i>
 					<span class="block text-xs mt-1">슬픔</span>
 				</button>
 				<button type="button" id="emoTagBtn-3"
 					class="emotag-btn w-14 h-14 rounded-full flex flex-col items-center justify-center bg-[#FF8A65] text-2xl shadow border-2 border-transparent focus:outline-none transition"
 					onclick="selectEmoTag(3)">
-					😠
+					<i class="fa-solid fa-paw" style="color: #ff4405;"></i>
 					<span class="block text-xs mt-1">분노</span>
 				</button>
 				<button type="button" id="emoTagBtn-4"
 					class="emotag-btn w-14 h-14 rounded-full flex flex-col items-center justify-center bg-[#B39DDB] text-2xl shadow border-2 border-transparent focus:outline-none transition"
 					onclick="selectEmoTag(4)">
-					😰
+					<i class="fa-solid fa-paw" style="color: #895ed9;"></i>
 					<span class="block text-xs mt-1">불안</span>
 				</button>
 				<button type="button" id="emoTagBtn-5"
 					class="emotag-btn w-14 h-14 rounded-full flex flex-col items-center justify-center bg-[#E0E0E0] text-2xl shadow border-2 border-transparent focus:outline-none transition"
 					onclick="selectEmoTag(5)">
-					❓
-					<span class="block text-xs mt-1">분류안함</span>
+					<i class="fa-solid fa-paw" style="color: #8a8a8a;"></i>
+					<span class="block text-xs mt-1">평온</span>
 				</button>
 			</div>
 
@@ -97,9 +97,6 @@ body, main {
 				</button>
 			</div>
 
-			<!-- 캐릭터 이미지 (우측 하단) -->
-			<div class="absolute bottom-10 right-10 w-24 h-24 rounded-full bg-center bg-contain bg-no-repeat"
-				style="background-image: url('/resource/images/animals/${sessionScope.user.characterImg}');"></div>
 		</form>
 	</main>
 	<script>

@@ -10,10 +10,10 @@
 	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
 
 	<!-- 본문 -->
-	<div class="relative px-6 py-12 ">
+	<div class="flex justify-center gap-6 items-start px-10 pt-12">
 		<!-- 일기 내용 박스 -->
 
-		<div class="relative bg-[#FFF3E9] p-6 rounded-2xl w-[80%] max-w-2xl mx-auto shadow-md min-h-[350px]">
+		<div class="relative bg-[#FFF3E9] p-6 rounded-2xl w-full max-w-2xl mx-auto shadow-md min-h-[350px]">
 
 			<!-- 감정태그 출력 (일기 내용 위) -->
 			<div class="flex items-center mb-3">
@@ -21,35 +21,35 @@
 					<c:when test="${diary.emoTagId == 1}">
 						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
 							style="background-color: #FFE082; color: #6d4c00;">
-							😊
+							<i class="fa-solid fa-paw" style="color: #ffcb2e;"></i>
 							<span class="ml-2">기쁨</span>
 						</span>
 					</c:when>
 					<c:when test="${diary.emoTagId == 2}">
 						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
 							style="background-color: #90CAF9; color: #19427c;">
-							😔
+							<i class="fa-solid fa-paw" style="color: #51abfb;"></i>
 							<span class="ml-2">슬픔</span>
 						</span>
 					</c:when>
 					<c:when test="${diary.emoTagId == 3}">
 						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
 							style="background-color: #FF8A65; color: #702009;">
-							😠
+							<i class="fa-solid fa-paw" style="color: #ff4405;"></i>
 							<span class="ml-2">분노</span>
 						</span>
 					</c:when>
 					<c:when test="${diary.emoTagId == 4}">
 						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
 							style="background-color: #B39DDB; color: #4b2c6d;">
-							😰
+							<i class="fa-solid fa-paw" style="color: #895ed9;"></i>
 							<span class="ml-2">불안</span>
 						</span>
 					</c:when>
 					<c:otherwise>
 						<span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
 							style="background-color: #E0E0E0; color: #4e4e4e;">
-							❓
+							<i class="fa-solid fa-paw" style="color: #8a8a8a;"></i>
 							<span class="ml-2">분류안함</span>
 						</span>
 					</c:otherwise>
@@ -80,8 +80,14 @@
 		</div>
 
 		<!-- 캐릭터 이미지 -->
-		<div class="absolute bottom-6 right-6">
-			<img src="/resource/images/animals/${sessionScope.user.characterImg}" class="w-20 h-20 object-contain" />
+		<div class="flex flex-col items-end self-end">
+			<div class="text-sm group mr-2">
+				<a href="/feelimals/chatDiary/list" class="text-sm group-hover:text-blue-500">목록</a>
+				으로 갈래?
+			</div>
+
+			<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" alt="캐릭터" alt="AI 캐릭터"
+				class="w-40 h-40 object-contain" />
 		</div>
 	</div>
 </body>

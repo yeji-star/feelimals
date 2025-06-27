@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magic/1.1.0/magic.min.css" />
 
 <style>
-
 #settingPanel {
 	position: fixed;
 	right: 0;
@@ -26,7 +25,9 @@
 
 	<div class="flex justify-between items-center p-4 font-bold border-b border-orange-300">
 		<span>설정</span>
-		<button onclick="closeSetting()" class="text-xl">&times;</button>
+		<button onclick="closeSetting()">
+			<i class="fa-solid fa-xmark fa-xl" style="color: #ffa94b;"></i>
+		</button>
 	</div>
 	<ul class="p-4 space-y-4 text-lg">
 		<li>

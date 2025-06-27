@@ -22,12 +22,44 @@
     }
   }
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.clouds.min.js"></script>
+
+<style>
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+header {
+	z-index: 5;
+	position: relative;
+}
+
+body, main {
+	background-color: transparent !important;
+}
+
+#vanta-bg {
+	position: fixed;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+}
+</style>
+
 </head>
 <body class="bg-[#FAF7F5] min-h-screen">
 
 	<%@ include file="/WEB-INF/jsp/feelimals/common/header.jspf"%>
 	<%@ include file="/WEB-INF/jsp/feelimals/common/settings.jspf"%>
-	
+
+	<div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
+
 	<main class="flex justify-center items-center py-16">
 		<form action="/feelimals/diary/doModify" method="post" onsubmit="return DiaryModify__submit(this);"
 			class="relative w-full max-w-2xl bg-[#FFF3E9] p-6 rounded-2xl shadow space-y-4">
@@ -88,5 +120,20 @@
 				style="background-image: url('/resource/images/animals/${sessionScope.user.characterImg}');"></div>
 		</form>
 	</main>
+	<script>
+  $(function() {
+	  VANTA.CLOUDS({
+	      el: "#vanta-bg",
+	      mouseControls: true,
+	      touchControls: true,
+	      gyroControls: false,
+	      minHeight: 200.00,
+	      minWidth: 200.00,
+	      skyColor: 0x93674a,
+	      speed: 0.50
+	    });
+   
+  });
+</script>
 </body>
 </html>

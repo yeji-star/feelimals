@@ -121,6 +121,8 @@ body {
 
 			<button onclick="toggleEditMenu()" class="float-right text-sm font-bold" style="color: #FB8C00;">✕</button>
 			<br>
+			<a href="/feelimals/chatDiary/list"
+				class="block text-center py-1 rounded font-semibold transition" style="color: #FFA500;">목록</a>
 			<a href="/feelimals/chat/deleteChat?id=${sessionId}" onclick="return confirm('정말 삭제할까?');"
 				class="block text-center py-1 rounded font-semibold transition" style="color: #E53935;">삭제</a>
 		</div>

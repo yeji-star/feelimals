@@ -128,10 +128,12 @@ opacity
 
 		<!-- 캐릭터 + 말풍선 (리스트 바로 오른쪽 하단) -->
 		<div class="flex flex-col items-end self-end">
-			<div class="text-xs text-gray-700 mb-1">최선을 다했구나</div>
-			<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" alt="캐릭터" alt="AI 캐릭터"
-				class="character-img w-30 h-30 object-contain" />
+			<div class="text-s mr-5 text-gray-700">최선을 다했구나!</div>
+			<img src="/resource/img/chara_${rq.loginedMember.charaId }_1.png" alt="캐릭터" alt="AI 캐릭터"
+				class="character-img w-50 h-50 object-contain" />
 		</div>
 
 	</div>
+	
 </body>
+<%@ include file="/WEB-INF/jsp/feelimals/common/foot.jspf"%>

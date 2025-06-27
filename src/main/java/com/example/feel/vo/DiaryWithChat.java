@@ -23,6 +23,7 @@ public class DiaryWithChat {
 	private boolean delStatus;
 	private LocalDateTime delDate;
 	
+	private Boolean isUser;
 	private Boolean thisChat;
 	private String writer;
 	
