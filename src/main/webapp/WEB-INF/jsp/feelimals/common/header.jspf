@@ -5,8 +5,16 @@
 
 <style>
 .menu-item.active {
-	color: #FFA726;
+	color: #FFA726 !important;
 	font-weight: bold;
+}
+
+.menu-item.active:hover {
+	color: #fb8c00 !important;
+}
+
+.menu-item:hover {
+	color: #FFD180 !important; /* 원하는 hover 색 */
 }
 </style>
 <!-- ✅ 헤더 -->
@@ -16,21 +24,23 @@
 		<ul class="flex gap-6 text-xl items-center">
 			<li>
 				<a href="/feelimals/chat"
-					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/chat') ? ' active' : ''}"> 대화 </a>
+					class="menu-item hover:text-yellow-500 ${fn:startsWith(curUri, '/WEB-INF/jsp/feelimals/chat.jsp') ? ' active' : ''}">
+					대화 </a>
 			</li>
 			<li>
 				<a href="/feelimals/diary/write"
-					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/diary/write') ? ' active' : ''}"> 일기
-				</a>
+					class="menu-item hover:text-yellow-500 ${fn:startsWith(curUri, '/WEB-INF/jsp/feelimals/diary/write.jsp') ? ' active' : ''}">
+					일기 </a>
 			</li>
 			<li>
 				<a href="/feelimals/chatDiary/list"
-					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/chatDiary/list') ? ' active' : ''}">
+					class="menu-item hover:text-yellow-500 ${fn:startsWith(curUri, '/WEB-INF/jsp/feelimals/chatDiary/list.jsp') ? ' active' : ''}">
 					목록 </a>
 			</li>
 			<li>
 				<a href="/feelimals/calendar"
-					class="menu-item hover:text-yellow-500${fn:startsWith(curUri, '/feelimals/calendar') ? ' active' : ''}"> 달력 </a>
+					class="menu-item hover:text-yellow-500 ${fn:startsWith(curUri, '/WEB-INF/jsp/feelimals/calendar.jsp') ? ' active' : ''}">
+					달력 </a>
 			</li>
 			<li>
 				<button type="button" onclick="openSetting()" class="hover:underline focus:outline-none">
