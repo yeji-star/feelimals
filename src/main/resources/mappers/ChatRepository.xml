@@ -69,7 +69,8 @@
 		TRUE
 		AND (
 		cd.isUser = TRUE
-		OR (cd.isUser = FALSE AND cd.body = '오늘 어떻게 보냈어?')
+		OR (cd.isUser = FALSE AND cd.body = '오늘 어떻게
+		보냈어?')
 		)
 		ORDER BY cd.id ASC
 	</select>

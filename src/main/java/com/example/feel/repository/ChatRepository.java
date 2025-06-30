@@ -12,7 +12,14 @@ import com.example.feel.vo.ChatWithAi;
 @Mapper
 public interface ChatRepository {
 
-	public void writeUserMessage(int memberId, int sessionId, String body, int emoTagId, boolean isUser, boolean thisChat);
+	public void writeUserMessage(
+	        @Param("memberId") int memberId,
+	        @Param("sessionId") int sessionId,
+	        @Param("body") String body,
+	        @Param("emoTagId") int emoTagId,
+	        @Param("isUser") boolean isUser,
+	        @Param("thisChat") boolean thisChat
+	    );
 
 	public int getLastInsertId();
 
