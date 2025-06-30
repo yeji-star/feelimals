@@ -44,6 +44,12 @@ public class ChatService {
 
 		return chatRepository.getLastInsertId();
 	}
+	
+	// 첫번째 AI 메세지 저장
+	public void writeAiMessage(int sessionId, int memberId, String body, int emoTagId, boolean isUser, boolean isChat) {
+		chatRepository.writeUserMessage(memberId, sessionId, body, 5, false, true);
+		
+	}
 
 	// 사용자 메시지 저장 (감정까지 저장)
 	public int writeUserMessage(int memberId, int sessionId, String body, int emoTagId, boolean isUser,
@@ -166,5 +172,7 @@ public class ChatService {
 
 		return ResultData.from("S-1 / ", Ut.f("%d번 대화를 삭제했어.", session.getId()));
 	}
+
+
 
 }

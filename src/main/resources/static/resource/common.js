@@ -184,7 +184,16 @@ function renderMessages(messages) {
 	}
 	messages.forEach(msg => {
 		if (msg.user) {
+			if (msg.body && msg.body.trim() === "오늘 어떻게 보냈어?") return;
 			appendMessage({ type: "user", body: msg.body });
+		} else if (!msg.user && (!msg.aiReply || msg.aiReply.trim() === "")) {
+			// body가 null/빈 문자열이 아니어야 출력
+			if (typeof msg.body === 'string' && msg.body.trim().length > 0) {
+				// 오직 "오늘 어떻게 보냈어?"만 허용
+				if (msg.body.trim() === "오늘 어떻게 보냈어?") {
+					appendMessage({ type: "ai", body: msg.body, emoTagId: msg.emoTagId });
+				}
+			}
 		}
 		if (msg.aiReply && msg.aiReply.trim() !== "") {
 			appendMessage({ type: "ai", body: msg.aiReply, emoTagId: msg.emoTagId });

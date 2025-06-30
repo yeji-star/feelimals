@@ -40,6 +40,8 @@ public interface ChatRepository {
 
 	public void doDeleteAiReplySession(int id);
 
+
+
 	
 }
 

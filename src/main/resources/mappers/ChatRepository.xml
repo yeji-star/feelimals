@@ -62,9 +62,11 @@
 		ar.model,
 		ar.regDate AS aiRegDate
 		FROM chatDiary cd
-		LEFT JOIN aiReply ar ON cd.id = ar.chatDiaryId
+		LEFT JOIN aiReply ar ON cd.id
+		= ar.chatDiaryId
 		WHERE cd.sessionId = #{sessionId}
-		AND cd.thisChat = TRUE
+		AND cd.thisChat =
+		TRUE
 		ORDER BY cd.id ASC
 	</select>
 
@@ -72,22 +74,22 @@
 	<select id="getChatWithAiListByMemberId"
 		resultType="com.example.feel.vo.ChatWithAi">
 		SELECT
+		cs.id AS sessionId,
+		cs.regDate AS sessionRegDate,
 		cd.id AS chatId,
 		cd.body AS userBody,
-		cd.regDate AS
-		userRegDate,
+		cd.regDate AS userRegDate,
 		ar.reply AS aiReply,
 		ar.model AS model,
-		ar.regDate AS
-		aiRegDate
-		FROM chatDiary cd
-		LEFT JOIN aiReply ar
-		ON cd.id =
-		ar.chatdiaryId
-		WHERE cd.memberId = #{memberId}
-		AND cd.thisChat =
-		true
-		ORDER BY cd.id DESC
+		ar.regDate AS aiRegDate
+		FROM chatSession cs
+		LEFT JOIN chatDiary cd ON cs.id = cd.sessionId
+		AND cd.thisChat = TRUE
+		AND cd.isUser = TRUE
+		LEFT JOIN aiReply ar ON cd.id = ar.chatDiaryId
+		WHERE cs.memberId = #{memberId}
+		ORDER BY cs.id DESC
+
 	</select>
 
 	<!-- 사용자 메시지 수정 -->
@@ -146,5 +148,6 @@
 		updateDate = NOW(),
 		memberId = #{memberId}
 	</insert>
+
 
 </mapper>

@@ -6,31 +6,40 @@
 <mapper
 	namespace="com.example.feel.repository.DiaryWithChatRepository">
 
+<!-- 대화 (첫가로) 와 일기 (두가로) 동시 출력 -->
 	<select id="getForPrintDiaryWithChats"
-		resultType="DiaryWithChat">
+		resultType="com.example.feel.vo.DiaryWithChat">
+		(
 		SELECT
-		cd.id,
-		cd.memberId,
-		cd.sessionId,
-		cd.body,
-		cd.thisChat,
-		cd.emoTagId,
-		cd.regDate,
-		cd.updateDate,
-		cd.delStatus,
-		ar.reply AS
-		aiReply,
-		ar.regDate AS aiReplyRegDate
-		FROM chatDiary AS cd
-		LEFT JOIN
-		aiReply AS ar
-		ON cd.id = ar.chatdiaryId
-		WHERE cd.memberId = #{memberId}
-		AND cd.delStatus
-		= 0
-		ORDER BY cd.id DESC
-
+		c1.id, c1.memberId, c1.emoTagId, c1.sessionId, c1.regDate, c1.updateDate,
+		c1.body, c1.delStatus, c1.delDate, c1.isUser, c1.thisChat,
+		ar.reply as aiReply, ar.model as aiModel, ar.regDate as aiReplyRegDate,
+		false as userCanModify, false as userCanDelete
+		FROM chatDiary c1
+		LEFT JOIN aiReply ar ON c1.id = ar.chatDiaryId
+		WHERE c1.memberId = #{memberId}
+		AND c1.thisChat = TRUE
+		AND c1.isUser = TRUE
+		AND c1.id = (
+		SELECT MIN(id)
+		FROM chatDiary c2
+		WHERE c2.sessionId = c1.sessionId
+		AND c2.thisChat = TRUE
+		AND c2.isUser = TRUE
+		)
+		UNION ALL
+		SELECT
+		id, memberId, emoTagId, sessionId, regDate, updateDate, body, delStatus,
+		delDate, isUser, thisChat,
+		NULL as aiReply, NULL as aiModel, NULL as aiReplyRegDate,
+		false as userCanModify, false as userCanDelete
+		FROM chatDiary
+		WHERE memberId = #{memberId}
+		AND thisChat = FALSE
+		)
+		ORDER BY regDate DESC
 	</select>
+
 
 	<!-- 채팅만 뽑기 -->
 	<select id="getChatOnly" resultType="DiaryWithChat">
@@ -45,10 +54,12 @@
 		cd.updateDate,
 		cd.delStatus,
 		ar.reply AS aiReply,
-		ar.regDate AS aiReplyRegDate
+		ar.regDate AS
+		aiReplyRegDate
 		FROM chatDiary AS cd
 		LEFT JOIN aiReply AS ar
-		ON cd.id = ar.chatdiaryId
+		ON cd.id =
+		ar.chatdiaryId
 		WHERE cd.memberId = #{memberId}
 		AND cd.thisChat = TRUE
 		AND cd.delStatus = 0
@@ -68,10 +79,12 @@
 		cd.updateDate,
 		cd.delStatus,
 		ar.reply AS aiReply,
-		ar.regDate AS aiReplyRegDate
+		ar.regDate AS
+		aiReplyRegDate
 		FROM chatDiary AS cd
 		LEFT JOIN aiReply AS ar
-		ON cd.id = ar.chatdiaryId
+		ON cd.id =
+		ar.chatdiaryId
 		WHERE cd.memberId = #{memberId}
 		AND cd.thisChat = FALSE
 		AND cd.delStatus = 0
