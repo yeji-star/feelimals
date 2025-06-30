@@ -67,6 +67,10 @@
 		WHERE cd.sessionId = #{sessionId}
 		AND cd.thisChat =
 		TRUE
+		AND (
+		cd.isUser = TRUE
+		OR (cd.isUser = FALSE AND cd.body = '오늘 어떻게 보냈어?')
+		)
 		ORDER BY cd.id ASC
 	</select>
 
@@ -82,11 +86,14 @@
 		ar.reply AS aiReply,
 		ar.model AS model,
 		ar.regDate AS aiRegDate
-		FROM chatSession cs
+		FROM
+		chatSession cs
 		LEFT JOIN chatDiary cd ON cs.id = cd.sessionId
-		AND cd.thisChat = TRUE
+		AND
+		cd.thisChat = TRUE
 		AND cd.isUser = TRUE
-		LEFT JOIN aiReply ar ON cd.id = ar.chatDiaryId
+		LEFT JOIN aiReply ar ON cd.id =
+		ar.chatDiaryId
 		WHERE cs.memberId = #{memberId}
 		ORDER BY cs.id DESC
 

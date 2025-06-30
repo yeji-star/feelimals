@@ -52,9 +52,13 @@ public class ChatController {
 		// 사용자
 		int memberId = rq.getLoginedMemberId();
 
+		if (body == null || body.trim().isEmpty() || "오늘 어떻게 보냈어?".equals(body.trim())) {
+			return ResultData.from("F-1", "유효하지 않은 메시지(빈값 또는 시작 멘트)");
+		}
+
 		// 새 세션 생성
 		int sessionId = chatService.createNewChatSession(memberId);
-		
+
 		String firstAi = "오늘 어떻게 보냈어?";
 		int firstChatAi = chatService.writeUserMessage(memberId, sessionId, firstAi, 5, false, true);
 
@@ -87,6 +91,10 @@ public class ChatController {
 	@ResponseBody
 	public ResultData<Map<String, Object>> addMessage(@RequestParam int sessionId, @RequestParam String body) {
 		int memberId = rq.getLoginedMemberId();
+
+		if (body == null || body.trim().isEmpty() || "오늘 어떻게 보냈어?".equals(body.trim())) {
+			return ResultData.from("F-1", "유효하지 않은 메시지(빈값 또는 시작 멘트)");
+		}
 
 		// 1차 감정
 		String emotion = chatService.getEmotion(body);

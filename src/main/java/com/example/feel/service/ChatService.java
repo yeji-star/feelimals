@@ -44,11 +44,11 @@ public class ChatService {
 
 		return chatRepository.getLastInsertId();
 	}
-	
+
 	// 첫번째 AI 메세지 저장
 	public void writeAiMessage(int sessionId, int memberId, String body, int emoTagId, boolean isUser, boolean isChat) {
 		chatRepository.writeUserMessage(memberId, sessionId, body, 5, false, true);
-		
+
 	}
 
 	// 사용자 메시지 저장 (감정까지 저장)
@@ -60,6 +60,10 @@ public class ChatService {
 
 	// AI 응답 저장
 	public void writeAiReply(int chatDiaryId, String reply, String model) {
+		if (reply == null || reply.trim().isEmpty()) {
+			// 저장하지 않음
+			return;
+		}
 		chatRepository.writeAiReply(chatDiaryId, reply, model);
 
 	}
@@ -158,7 +162,6 @@ public class ChatService {
 		chatRepository.doDeleteAiReplySession(id);
 		chatRepository.doDeleteChatDiarySession(id);
 		chatRepository.doDeleteChatSession(id);
-		
 
 	}
 
@@ -172,7 +175,5 @@ public class ChatService {
 
 		return ResultData.from("S-1 / ", Ut.f("%d번 대화를 삭제했어.", session.getId()));
 	}
-
-
 
 }
