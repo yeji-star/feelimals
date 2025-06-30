@@ -29,6 +29,8 @@
 					<option value="1">🐰 토끼</option>
 					<option value="2">🦉 부엉이</option>
 					<option value="3">🐱 고양이</option>
+					<option value="4">🐶 개</option>
+					<option value="5">🐻 곰</option>
 				</select>
 				<button type="submit" class="bg-[#FFA852] text-white px-4 py-2 rounded-full hover:bg-[#ff9444] transition">회원가입</button>
 			</form>
