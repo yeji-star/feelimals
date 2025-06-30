@@ -16,11 +16,23 @@
 .menu-item:hover {
 	color: #FFD180 !important; /* 원하는 hover 색 */
 }
+
+.logo {
+    height: 50px;      /* 원하는 만큼 크게, 100px 이상도 가능 */
+    width: auto;       /* 가로 비율 자동 */
+    display: block;
+}
+header {
+    min-height: 30px;           /* 헤더 전체 높이 */
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    /* Tailwind 쓰면 py-8 같은 거로 맞춰도 됨 */
+}
 </style>
 <!-- ✅ 헤더 -->
 <header class="bg-[#FFEBD3] rounded-b-xl px-6 py-4 flex items-center justify-between text-gray-700 text-base">
 	<a href="/">
-		<img src="/resource/img/logo.png" class="logo" alt="로고" style="height:48px; width:auto;"/>
+		<img src="/resource/img/logo.png" class="logo" alt="로고"/>
 	</a>
 	<nav>
 		<ul class="flex gap-6 text-xl items-center">
