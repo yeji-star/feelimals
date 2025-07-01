@@ -59,8 +59,8 @@ public class ChatController {
 		// 새 세션 생성
 		int sessionId = chatService.createNewChatSession(memberId);
 
-		String firstAi = "오늘 어떻게 보냈어?";
-		int firstChatAi = chatService.writeUserMessage(memberId, sessionId, firstAi, 5, false, true);
+		// AI 첫 메시지
+		chatService.writeUserMessage(memberId, sessionId, "오늘 어떻게 보냈어?", 5, false, true);
 
 		// 1. 1차- 감정 추출 요청
 		String emotion = chatService.getEmotion(body);

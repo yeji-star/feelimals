@@ -60,18 +60,12 @@
 		cd.regDate,
 		ar.reply AS aiReply,
 		ar.model,
-		ar.regDate AS aiRegDate
+		ar.regDate AS
+		aiRegDate
 		FROM chatDiary cd
-		LEFT JOIN aiReply ar ON cd.id
-		= ar.chatDiaryId
+		LEFT JOIN aiReply ar ON cd.id = ar.chatDiaryId
 		WHERE cd.sessionId = #{sessionId}
-		AND cd.thisChat =
-		TRUE
-		AND (
-		cd.isUser = TRUE
-		OR (cd.isUser = FALSE AND cd.body = '오늘 어떻게
-		보냈어?')
-		)
+		AND cd.thisChat = TRUE
 		ORDER BY cd.id ASC
 	</select>
 

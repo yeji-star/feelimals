@@ -131,28 +131,24 @@ body {
 	<div class="chat-container">
 		<div class="chat-box" id="chatBox">
 			<!-- 캐릭터가 먼저 말하기 -->
-			<div class="chat-msg-wrapper ai">
-				<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" alt="AI 캐릭터" />
-				<div class="msg him">오늘 어떻게 보냈어?</div>
-			</div>
+<!-- AI가 먼저 말하기 -->
+<div class="chat-msg-wrapper ai">
+	<img src="/resource/img/chara_${rq.loginedMember.charaId}_5.png" class="character-img" alt="AI 캐릭터" />
+	<div class="msg him">오늘 어떻게 보냈어?</div>
+</div>
 
-			<c:forEach var="items" items="${messages}">
+<c:forEach var="items" items="${messages}">
+	<c:if test="${items.isUser}">
+		<div class="msg you">${items.body}</div>
+	</c:if>
+	<c:if test="${not empty items.aiReply}">
+		<div class="chat-msg-wrapper ai">
+			<img src="/resource/img/chara_${rq.loginedMember.charaId}_${items.emoTagId}.png" class="character-img" />
+			<div class="msg him">${items.aiReply}</div>
+		</div>
+	</c:if>
+</c:forEach>
 
-				<div class="msg you">${items.body}</div>
-
-				<div class="chat-msg-wrapper ai">
-					<c:choose>
-						<c:when test="${not empty items.emoTagId}">
-							<img src="/resource/img/chara_${rq.loginedMember.charaId }_${items.emoTagId}.png" class="character-img" />
-						</c:when>
-						<c:otherwise>
-							<img src="/resource/img/chara_${rq.loginedMember.charaId }_5.png" class="character-img" />
-						</c:otherwise>
-					</c:choose>
-					<div class="msg him">${items.aiReply}</div>
-				</div>
-
-			</c:forEach>
 		</div>
 
 		<!-- 입력창 -->

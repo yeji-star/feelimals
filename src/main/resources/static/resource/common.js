@@ -177,38 +177,40 @@ function appendMessage({ type, body, emoTagId }) {
 // 전체 메시지(과거 대화) 복원하기 (새로고침, 입장시)
 function renderMessages(messages) {
 	const chatBox = document.getElementById("chatBox");
-	chatBox.innerHTML = ''; // 먼저 모두 비우기
-	let hasFirst = false;
+	chatBox.innerHTML = '';
 
+	if (!messages || messages.length === 0) {
+		appendMessage({ type: "ai", body: "오늘 어떻게 보냈어?", emoTagId: 5 });
+		return;
+	}
 	messages.forEach(msg => {
-		// AI 첫 메시지(시작)
-		if (!msg.user && msg.body && msg.body.trim() === "오늘 어떻게 보냈어?") {
-			appendMessage({ type: "ai", body: msg.body, emoTagId: msg.emoTagId });
-			hasFirst = true;
-			return;
-		}
-	});
-
-	messages.forEach(msg => {
-		if (msg.user) {
-			if (msg.body && msg.body.trim() === "오늘 어떻게 보냈어?") return;
+		// 사용자 메시지(실제 사용자가 입력한 메시지만)
+		if (
+			(msg.user === true || msg.isUser === true || msg.isUser === 1)
+			&& msg.body && msg.body.trim() !== ""
+			&& msg.body !== "오늘 어떻게 보냈어?"
+		) {
 			appendMessage({ type: "user", body: msg.body });
-		} else if (!msg.user && (!msg.aiReply || msg.aiReply.trim() === "")) {
-			// (첫 메시지는 위에서 처리했으므로 제외)
 		}
+		// 시스템 메시지(첫 질문 등)
+		else if (
+			(!msg.user && !msg.isUser) &&
+			msg.body && msg.body.trim() !== "" &&
+			(!msg.aiReply || msg.aiReply.trim() === "")
+		) {
+			appendMessage({ type: "ai", body: msg.body, emoTagId: msg.emoTagId });
+		}
+		// AI 답변(공백이면 제외)
 		if (msg.aiReply && msg.aiReply.trim() !== "") {
 			appendMessage({ type: "ai", body: msg.aiReply, emoTagId: msg.emoTagId });
 		}
 	});
 
-	// 혹시라도 없으면 강제로 출력
-	if (!hasFirst) {
-		appendMessage({ type: "ai", body: "오늘 어떻게 보냈어?", emoTagId: 5 });
-	}
 	setTimeout(() => {
 		chatBox.scrollTop = chatBox.scrollHeight;
 	}, 0);
 }
+
 
 
 // 대화 수정 시, 입력창 활성화 (이후 추가 예정)
